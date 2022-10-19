@@ -22,4 +22,4 @@ Ce projet suit la méthode agile _Scrum_ qui consiste à :
 
 - Dans la branche `main` on ne met que les fichiers permettant de configurer ou de documenter le projet.
 
-- Le codage se fait dans la branche `develop`. Plus précisément, vous créez une sous-branche à partir de cette branche, puis vous codez votre fonctionnalité dans votre branche nommée `nom_de_la_fonctionnalite` et quand vous avez fini vous faites une merge request de votre branche dans `develop`. 
+- Le codage se fait dans la branche `develop`. Plus précisément, vous créez une sous-branche à partir de cette branche, puis vous codez votre fonctionnalité dans votre branche nommée `features/<nom_de_la_fonctionnalite>` et quand vous avez fini vous faites une merge request de votre branche dans `develop`. 
