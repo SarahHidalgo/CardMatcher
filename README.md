@@ -2,11 +2,14 @@
 
 Environnement Devops pour le projet informatique de FISE2.
 
-## Getting started
+## Avoir le projet sur son git perso
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Dans un premier temps, suivre les étapes du TD1 mais sur votre ordi et pas sur la VM ; c'est à dire :
+- Télécharger git sur son ordi.
+- Entrer la commande : `ssh-keygen`. Cela va vous créer une clé sur votre ordi qui vous servira à faire un lien entre votre ordi et Gitlab.
+- Entrer la commande : `$ cat ~/.ssh/id_rsa.pub`. Cela va vous donner votre clé ssh commençant par ssh-rsa. Copier cette clé.
+- Aller dans Gitlab - Mon Profil - SSH Keys et coller votre clé.
+- Aller sur le projet dans Gitlab puis le cloner grâce à la clé SSH du projet (commande `git clone <clé ssh>`)
 
 ## Add your files
 
