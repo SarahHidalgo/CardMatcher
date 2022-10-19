@@ -12,10 +12,7 @@ Ce projet suit la méthode agile _Scrum_ qui consiste à :
 
 **Utilisation de Gitlab**
 
-
-- Ne pas toucher à la branche main avant la version finale.
-- Quand on veut coder, il faut créer une nouvelle branche portant le nom de la fonctionnalité qu'on veut implémenter. On code sur cette branche et dès qu'il est bon on le merge avec la branche develop.
-- Bien penser à toujours tester le plus possible les branches les plus annexes (on les importe avec merge), avant de les mettre en commun avec les branches centrales (on les rajoute avec merge request).
-
+- Bien nommer les branches par le nom de leur fonctionnalité
+- Toujours tester dans les branches les plus annexes les fonctionnalités ajoutées dans les branches communes (on les importe avec un merge), et quand ça fonctionne on les met sur la branche commune (merge request, qui se fait souvent directement dans le gitlab).
 
 **Qu'est ce qui correspond à quelle branche ?**
