@@ -12,4 +12,6 @@ Ce projet suit la méthode agile _Scrum_ qui consiste à :
 
 **Utilisation de Gitlab**
 
+- Bien nommer les branches par le nom de leur fonctionnalité
+
 **Qu'est ce qui correspond à quelle branche ?**
