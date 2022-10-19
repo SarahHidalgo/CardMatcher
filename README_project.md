@@ -13,5 +13,6 @@ Ce projet suit la méthode agile _Scrum_ qui consiste à :
 **Utilisation de Gitlab**
 
 - Bien nommer les branches par le nom de leur fonctionnalité
+- Toujours tester dans les branches les plus annexes les fonctionnalités ajoutées dans les branches communes (on les importe avec un merge), et quand ça fonctionne on les met sur la branche commune (merge request, qui se fait souvent directement dans le gitlab).
 
 **Qu'est ce qui correspond à quelle branche ?**
