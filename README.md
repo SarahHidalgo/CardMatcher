@@ -53,11 +53,11 @@ Let people know what your project can do specifically. Provide context and add a
 
 ## Contributeurs
 
-Product Owner : Mohammed Alimoussa
+**Product Owner** : Mohammed Alimoussa
 
-Scrum Master : 
+**Scrum Master** : 
 
-Expert Java : Pierre Jean Drevet
+**Expert Java** : Pierre Jean Drevet
 
 **Equipe de développement** : Mélodie Coué, Fatima Ezzahrae Errami, Sarah Hidalgo, Nabil Chemani, Xavier Tardy, Valentin Pontiggia
 
