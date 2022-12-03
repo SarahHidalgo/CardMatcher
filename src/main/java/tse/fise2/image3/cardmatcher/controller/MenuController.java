@@ -31,4 +31,8 @@ public class MenuController {
 
         btn_test.getScene().setRoot(modeTest);
     }
+
+    public void quit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
 }
