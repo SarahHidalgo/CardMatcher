@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import java.net.URL?>
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.MainSceneController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.MenuController">
     <children>
         <MenuBar>
             <menus>
@@ -31,7 +31,7 @@
             </font>
         </Label>
         <ImageView fx:id="menuFrame" fitHeight="252.0" fitWidth="423.0" pickOnBounds="true" preserveRatio="true" />
-        <Button fx:id="btn_test" mnemonicParsing="false" text="Mode Test" textAlignment="CENTER">
+        <Button fx:id="btn_test" mnemonicParsing="false" text="Mode Test"  onAction="#onClickedtest" textAlignment="CENTER">
             <VBox.margin>
                 <Insets bottom="10.0" top="5.0" />
             </VBox.margin>

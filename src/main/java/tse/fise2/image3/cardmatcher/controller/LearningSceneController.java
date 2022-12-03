@@ -17,16 +17,16 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.image.ImageView;
 
-import tse.fise2.image3.cardmatcher.Camera;
+import tse.fise2.image3.cardmatcher.model.Camera;
+import tse.fise2.image3.cardmatcher.model.CameraLearning;
 
 
-public class MainSceneController {
+public class LearningSceneController {
     @FXML
     private Button start_btn;
     @FXML
-    private Button btn_test;
-    @FXML
-    private Button btn_app;
+    private Button back_btn;
+
     @FXML
     private ImageView learningFrame;
     @FXML
@@ -34,7 +34,7 @@ public class MainSceneController {
     @FXML
     private Label lab;
 
-    public Camera capture1 = new Camera();
+    public Camera capture1 = new CameraLearning();
 
     // Event Listener on Button[#start_btn].onAction
     @FXML
@@ -44,18 +44,16 @@ public class MainSceneController {
         capture1.openCamera(learningFrame,start_btn);
     }
 
-    /**
-     * When this method is called, it will switch scene from Menu to MainScene
-     */
-    @FXML
-    public void onClickedApp(ActionEvent event) throws IOException {
+
+    public void back(ActionEvent actionEvent)  throws IOException{
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
-        System.out.println(getClass().getResource("view/MainScene.fxml"));
-        Parent modeTest = FXMLLoader.load(getClass().getResource("view/MainScene.fxml"));
+        System.out.println(getClass().getResource("view/Menu.fxml"));
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/Menu.fxml"));
 
-        btn_test.getScene().setRoot(modeTest);
+        back_btn.getScene().setRoot(backLoader);
+
 
     }
 
