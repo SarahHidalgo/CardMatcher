@@ -5,20 +5,26 @@ package tse.fise2.image3.cardmatcher.controller;
 
 import java.awt.Label;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import javafx.event.ActionEvent;
 
 import javafx.scene.image.ImageView;
 
+import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import tse.fise2.image3.cardmatcher.model.Camera;
 import tse.fise2.image3.cardmatcher.model.CameraLearning;
+import tse.fise2.image3.cardmatcher.util.FileUtil;
 
 
 public class LearningSceneController {
@@ -57,4 +63,31 @@ public class LearningSceneController {
 
     }
 
+    public void gotest(ActionEvent actionEvent)  throws IOException{
+        capture1.setCameraActive(false);
+        // stop the timer
+        capture1.stopAcquisition();
+
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/Menu.fxml"));
+
+        back_btn.getScene().setRoot(backLoader);
+    }
+    public void importdatabase(ActionEvent actionEvent)  throws IOException{
+
+
+        Stage primaryStage = new Stage();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        directoryChooser.setInitialDirectory(new File("src"));
+
+
+            File selectedDirectory = directoryChooser.showDialog(primaryStage);
+        System.out.println(selectedDirectory.getAbsolutePath());
+            FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
+
+
+
+
+
+    }
 }

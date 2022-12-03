@@ -26,7 +26,10 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Menu" />
+                        <MenuItem mnemonicParsing="false" text="Menu" onAction="#back"/>
+                        <MenuItem mnemonicParsing="false" text="test" onAction="#gotest"/>
+                        <MenuItem mnemonicParsing="false" text="import learning database" onAction="#importdatabase"/>
+
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

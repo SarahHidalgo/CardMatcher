@@ -1,6 +1,12 @@
 package tse.fise2.image3.cardmatcher.util;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileUtil {
 
@@ -14,4 +20,23 @@ public class FileUtil {
         }
     }
 
-}
+    /**
+     *
+     * @param path
+     * @throws IOException
+     * this method aims to copy all the content of a certain directory in the learning database
+     */
+    public static void copyfolder(String path) throws IOException {
+        String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
+        String folder = userHome + "/apprentissage";
+        Path sourceDirectory = Paths.get(path);
+        Path targetDirectory = Paths.get(folder);
+        FileUtils.copyDirectory(new File(path),new File(folder),true);
+    }
+
+
+
+    }
+
+
+
