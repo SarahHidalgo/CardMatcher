@@ -58,7 +58,7 @@ public class TestSceneController {
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
-        System.out.println(getClass().getResource("view/Menu.fxml"));
+
         Parent backLoader = FXMLLoader.load(getClass().getResource("view/Menu.fxml"));
 
         back_btn.getScene().setRoot(backLoader);

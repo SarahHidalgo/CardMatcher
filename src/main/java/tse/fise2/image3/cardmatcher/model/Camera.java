@@ -177,7 +177,7 @@ public abstract class Camera{
             this.saveImage();
             InputStream stream = null;
             try {
-                stream = new FileInputStream("/Users/mac/Desktop/projet_informatique/apprentissage/joker.jpg");
+                stream = new FileInputStream("/Users/mac/Desktop/projet_informatique/apprentissage/images.png");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -210,6 +210,7 @@ public abstract class Camera{
             }
         }
         return frame;
+
     }
 
     public Label getLabel() {

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tse.fise2.image3.cardmatcher.controller.LearningSceneController;
 import tse.fise2.image3.cardmatcher.controller.MenuController;
+import tse.fise2.image3.cardmatcher.controller.StartController;
 
 
 public class App extends Application {
@@ -23,11 +24,11 @@ public class App extends Application {
     public void start(Stage primaryStage) throws InvocationTargetException {
         try {
 
-            URL fxmlLocation = getClass().getResource("controller/view/Menu.fxml");
+            URL fxmlLocation = getClass().getResource("controller/view/start.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlLocation);
 
             VBox root = (VBox) loader.load();
-            MenuController controller = loader.getController();
+            StartController controller = loader.getController();
             Scene scene =  new Scene(root);
 
             primaryStage.setTitle("CardMatcher");
