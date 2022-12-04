@@ -30,6 +30,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import tse.fise2.image3.cardmatcher.util.MsgUtil;
 
 public abstract class Camera{
 
@@ -169,12 +170,8 @@ public abstract class Camera{
         }else if(testingmode)
         {
             Thread.sleep(2000);
-            Alert a = new Alert(Alert.AlertType.NONE,
-                    "This  card belongs to class X", ButtonType.OK);
+            MsgUtil.DisplayMsg("this card belongs to class X");
 
-
-            // show the dialog
-            a.show();
             this.saveImage();
             InputStream stream = null;
             try {

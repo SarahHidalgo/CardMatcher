@@ -27,11 +27,16 @@ public class FileUtil {
      * this method aims to copy all the content of a certain directory in the learning database
      */
     public static void copyfolder(String path) throws IOException {
-        String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
-        String folder = userHome + "/apprentissage";
-        Path sourceDirectory = Paths.get(path);
-        Path targetDirectory = Paths.get(folder);
-        FileUtils.copyDirectory(new File(path),new File(folder),true);
+
+            String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
+            String folder = userHome + "/apprentissage";
+
+            Path sourceDirectory = Paths.get(path);
+            Path targetDirectory = Paths.get(folder);
+
+            FileUtils.copyDirectory(new File(path), new File(folder), true);
+
+
     }
 
 

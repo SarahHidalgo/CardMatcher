@@ -28,6 +28,7 @@
                     <items>
                         <MenuItem mnemonicParsing="false" text="Menu"  onAction="#back" />
                         <MenuItem mnemonicParsing="false" text="Learn"  onAction="#goLearn" />
+                        <MenuItem mnemonicParsing="false" text="Test" disable="true" />
 
                     </items>
                 </Menu>

@@ -9,11 +9,13 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.MenuController">
@@ -65,6 +67,13 @@
                                           <Font name="System Bold" size="49.0" />
                                        </font></Label>
                                             </children>
+                                 <effect>
+                                    <InnerShadow height="118.66" offsetY="10.0" radius="88.4925" width="237.31">
+                                       <color>
+                                          <Color opacity="0.8336520195007324" />
+                                       </color>
+                                    </InnerShadow>
+                                 </effect>
                                         </VBox>
                                         <VBox alignment="CENTER" prefHeight="569.0" prefWidth="367.0" style="-fx-background-color: fff;">
                                             <children>
