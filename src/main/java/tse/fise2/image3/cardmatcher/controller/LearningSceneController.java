@@ -45,7 +45,7 @@ public class LearningSceneController {
 
     // Event Listener on Button[#start_btn].onAction
     @FXML
-    public void startCamera(ActionEvent event) {
+    public void startCamera(ActionEvent event) throws InterruptedException {
         boolean learningmode = true;
         capture1.setLearningmode(learningmode);
         capture1.openCamera(learningFrame,start_btn);
