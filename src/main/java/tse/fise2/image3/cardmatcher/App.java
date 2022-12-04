@@ -13,7 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import tse.fise2.image3.cardmatcher.controller.MainSceneController;
+import tse.fise2.image3.cardmatcher.controller.LearningSceneController;
+import tse.fise2.image3.cardmatcher.controller.MenuController;
 
 
 public class App extends Application {
@@ -26,17 +27,17 @@ public class App extends Application {
             FXMLLoader loader = new FXMLLoader(fxmlLocation);
 
             VBox root = (VBox) loader.load();
-            MainSceneController controller = loader.getController();
+            MenuController controller = loader.getController();
             Scene scene =  new Scene(root);
 
             primaryStage.setTitle("CardMatcher");
             primaryStage.setScene(scene);
-            primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
-                public void handle(WindowEvent we)
-                {
-                    controller.capture1.stopAcquisition();
-                }
-            }));
+//            primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
+//                public void handle(WindowEvent we)
+//                {
+//                    controller.capture1.stopAcquisition();
+//                }
+//            }));
             primaryStage.show();
         }
         catch (Exception e) {

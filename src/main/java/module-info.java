@@ -12,9 +12,14 @@ module tse.fise2.image3.cardmatcher {
     requires javafx.graphics;
     requires opencv;
     requires java.desktop;
+    requires org.apache.commons.io;
 
     opens tse.fise2.image3.cardmatcher to javafx.fxml;
     exports tse.fise2.image3.cardmatcher;
     exports tse.fise2.image3.cardmatcher.controller;
     opens tse.fise2.image3.cardmatcher.controller to javafx.fxml;
+    exports tse.fise2.image3.cardmatcher.model;
+    opens tse.fise2.image3.cardmatcher.model to javafx.fxml;
+    opens tse.fise2.image3.cardmatcher.util to javafx.fxml;
+
 }
