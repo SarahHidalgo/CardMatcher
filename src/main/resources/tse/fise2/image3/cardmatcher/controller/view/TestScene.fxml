@@ -24,9 +24,11 @@
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Navigate">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Menu" />
+                        <MenuItem mnemonicParsing="false" text="Menu"  onAction="#back" />
+                        <MenuItem mnemonicParsing="false" text="Learn"  onAction="#goLearn" />
+
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

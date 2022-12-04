@@ -28,7 +28,16 @@
                     <items>
                         <MenuItem mnemonicParsing="false" text="Menu" onAction="#back"/>
                         <MenuItem mnemonicParsing="false" text="test" onAction="#gotest"/>
+
                         <MenuItem mnemonicParsing="false" text="import learning database" onAction="#importdatabase"/>
+
+                    </items>
+                </Menu>
+
+                <Menu mnemonicParsing="false" text="Navigate">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Menu" onAction="#back"/>
+                        <MenuItem mnemonicParsing="false" text="test" onAction="#gotest"/>
 
                     </items>
                 </Menu>

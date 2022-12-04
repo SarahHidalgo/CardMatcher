@@ -63,4 +63,14 @@ public class TestSceneController {
 
         back_btn.getScene().setRoot(backLoader);
     }
+
+    public void goLearn(ActionEvent actionEvent) throws IOException {
+        capture1.setCameraActive(false);
+        // stop the timer
+        capture1.stopAcquisition();
+
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/LearningScene.fxml"));
+
+        back_btn.getScene().setRoot(backLoader);
+    }
 }
