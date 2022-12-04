@@ -69,7 +69,7 @@ public class LearningSceneController {
         // stop the timer
         capture1.stopAcquisition();
 
-        Parent backLoader = FXMLLoader.load(getClass().getResource("view/Menu.fxml"));
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/TestScene.fxml"));
 
         back_btn.getScene().setRoot(backLoader);
     }
@@ -83,13 +83,13 @@ public class LearningSceneController {
 
 
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
-            System.out.println(selectedDirectory.getAbsolutePath());
+//            System.out.println(selectedDirectory.getAbsolutePath());
             FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
             MsgUtil.DisplayMsg("import success !");
         }
         catch (Exception e)
         {
-            MsgUtil.DisplayMsg("importation failed !");
+            MsgUtil.DisplayMsg("import failed !");
         }
 
 

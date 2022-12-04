@@ -17,21 +17,26 @@ public class MenuController {
     @FXML
     public void onClickedApp(ActionEvent event) throws IOException {
 
-        System.out.println(getClass().getResource("view/LearningScene.fxml"));
+
         Parent modeTest = FXMLLoader.load(getClass().getResource("view/LearningScene.fxml"));
 
         btn_app.getScene().setRoot(modeTest);
 
 
     }
+
     public void onClickedtest (ActionEvent actionEvent)throws IOException {
 
-        System.out.println(getClass().getResource("view/TestScene.fxml"));
+
         Parent modeTest = FXMLLoader.load(getClass().getResource("view/TestScene.fxml"));
 
         btn_test.getScene().setRoot(modeTest);
     }
 
+    /**
+     * @param actionEvent
+     * Terminating the main thread
+     */
     public void quit(ActionEvent actionEvent) {
         System.exit(0);
     }
