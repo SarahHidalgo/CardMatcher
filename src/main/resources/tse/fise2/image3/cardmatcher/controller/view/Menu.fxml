@@ -62,9 +62,9 @@
                                     <children>
                                         <VBox alignment="CENTER" prefHeight="569.0" prefWidth="486.0" styleClass="title">
                                             <children>
-                                                <Label fx:id="appName" contentDisplay="CENTER" layoutY="44.0" style="-fx-font-weight: bold;" text="CardMatcher" textAlignment="CENTER">
+                                                <Label fx:id="appName" contentDisplay="CENTER" layoutY="44.0" style="-fx-font-weight: bolder;" text="CardMatcher" textAlignment="CENTER">
                                        <font>
-                                          <Font name="System Bold" size="49.0" />
+                                          <Font name="Thonburi" size="96.0" />
                                        </font></Label>
                                             </children>
                                  <effect>
