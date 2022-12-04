@@ -87,7 +87,7 @@ public class LearningSceneController {
             FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
             MsgUtil.DisplayMsg("import success !");
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             MsgUtil.DisplayMsg("importation failed !");
         }
