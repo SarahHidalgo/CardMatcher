@@ -20,5 +20,6 @@ module tse.fise2.image3.cardmatcher {
     opens tse.fise2.image3.cardmatcher.controller to javafx.fxml;
     exports tse.fise2.image3.cardmatcher.model;
     opens tse.fise2.image3.cardmatcher.model to javafx.fxml;
+    opens tse.fise2.image3.cardmatcher.util to javafx.fxml;
 
 }

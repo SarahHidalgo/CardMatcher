@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import tse.fise2.image3.cardmatcher.model.Camera;
 import tse.fise2.image3.cardmatcher.model.CameraLearning;
 import tse.fise2.image3.cardmatcher.util.FileUtil;
+import tse.fise2.image3.cardmatcher.util.MsgUtil;
 
 
 public class LearningSceneController {
@@ -72,18 +73,24 @@ public class LearningSceneController {
 
         back_btn.getScene().setRoot(backLoader);
     }
-    public void importdatabase(ActionEvent actionEvent)  throws IOException{
+    public void importdatabase(ActionEvent actionEvent){
+        try {
 
+            Stage primaryStage = new Stage();
+            DirectoryChooser directoryChooser = new DirectoryChooser();
 
-        Stage primaryStage = new Stage();
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-
-        directoryChooser.setInitialDirectory(new File("src"));
+            directoryChooser.setInitialDirectory(new File("src"));
 
 
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
-        System.out.println(selectedDirectory.getAbsolutePath());
+            System.out.println(selectedDirectory.getAbsolutePath());
             FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
+            MsgUtil.DisplayMsg("import success !");
+        }
+        catch (IOException e)
+        {
+            MsgUtil.DisplayMsg("importation failed !");
+        }
 
 
 
