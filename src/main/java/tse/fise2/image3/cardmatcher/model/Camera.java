@@ -30,6 +30,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import tse.fise2.image3.cardmatcher.util.Audio;
 import tse.fise2.image3.cardmatcher.util.MsgUtil;
 
 public abstract class Camera{
@@ -131,6 +132,7 @@ public abstract class Camera{
             // stop the timer
             this.stopAcquisition();
             if (this.learningmode || this.testingmode) {
+                Audio.play_sound(getClass().getResource("media/shot_sound.wav"));
                 // update again the button content
                 btn.setText("Restart Camera");
 

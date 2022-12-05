@@ -57,7 +57,7 @@
     </top>
 
     <stylesheets>
-        <URL value="@../../styles.css" />
+        <URL value="@../../css/styles.css" />
     </stylesheets>
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
