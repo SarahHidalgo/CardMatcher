@@ -47,7 +47,8 @@ public abstract class Camera{
     private boolean learningmode;
     //testing mode
     private boolean testingmode;
-    private String PictureName ="classname";
+
+    private Card card= new Card("cardname");
 
     //
     private Label label = new Label();
@@ -156,6 +157,14 @@ public abstract class Camera{
 
     public abstract void saveImage( ) ;
 
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
     private void showInputTextDialog() throws InterruptedException {
         if(learningmode) {
             TextInputDialog dialog = new TextInputDialog("Write here");
@@ -166,13 +175,15 @@ public abstract class Camera{
             Optional<String> result = dialog.showAndWait();
 
             result.ifPresent(name -> {
+                card.setName(name);
                 this.label.setText(name);
                 this.saveImage();
+
             });
         }else if(testingmode)
         {
             Thread.sleep(2000);
-            MsgUtil.DisplayMsg("this card belongs to class X");
+            MsgUtil.DisplayMsg("this card belongs to class "+card.getName());
 
             this.saveImage();
             InputStream stream = null;
@@ -257,8 +268,6 @@ public abstract class Camera{
         this.learningmode = learningmode;
     }
 
-    public String getPictureName() {
-        return PictureName;
-    }
+
 }
 

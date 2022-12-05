@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -19,16 +20,19 @@
         </Button>
     </bottom>
     <center>
-        <ImageView fx:id="testingFrame" fitHeight="280.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+        <ImageView fx:id="testingFrame" fitHeight="280.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../images/closed_camera.png" />
+         </image></ImageView>
     </center>
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="Navigate">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Menu"  onAction="#back" />
-                        <MenuItem mnemonicParsing="false" text="Learn"  onAction="#goLearn" />
-                        <MenuItem mnemonicParsing="false" text="Test" disable="true" />
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="Menu" />
+                        <MenuItem mnemonicParsing="false" onAction="#goLearn" text="Learn" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Test" />
 
                     </items>
                 </Menu>
