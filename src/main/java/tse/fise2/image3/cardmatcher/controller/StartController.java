@@ -23,8 +23,8 @@ public class StartController {
 
     public void goMenu(MouseEvent mouseEvent) throws IOException, InterruptedException, UnsupportedAudioFileException, LineUnavailableException {
 
-
-       Audio.play_sound(this.getClass().getResource("media/card_sound.wav"));
+       //play audio when the app start
+//       Audio.play_sound(this.getClass().getResource("media/card_sound.wav"));
         Thread.sleep(1000);
         URL fxmlLocation = getClass().getResource("view/Menu.fxml");
 

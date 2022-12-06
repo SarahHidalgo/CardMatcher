@@ -107,7 +107,7 @@ public abstract class Camera{
 
                 // update the button content
                 if (this.learningmode || this.testingmode) {
-                    btn.setText("Capture");
+//                    btn.setText("Capture");
                 }
 
                 // close webcam when no capture taken
@@ -133,9 +133,10 @@ public abstract class Camera{
             // stop the timer
             this.stopAcquisition();
             if (this.learningmode || this.testingmode) {
+                // play sound when taking pic
                 Audio.play_sound(getClass().getResource("media/shot_sound.wav"));
                 // update again the button content
-                btn.setText("Restart Camera");
+//                btn.setText("Restart Camera");
 
                 // Name the capture and save it in a folder
                 this.showInputTextDialog();
