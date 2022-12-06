@@ -27,9 +27,9 @@
                 <Menu mnemonicParsing="false" text="File">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Menu" onAction="#back"/>
-                        <MenuItem mnemonicParsing="false" text="test" onAction="#gotest"/>
+                        <MenuItem mnemonicParsing="false" text="Test" onAction="#gotest"/>
 
-                        <MenuItem mnemonicParsing="false" text="import learning database" onAction="#importdatabase"/>
+                        <MenuItem mnemonicParsing="false" text="Import learning database" onAction="#importdatabase"/>
 
                     </items>
                 </Menu>
@@ -37,13 +37,13 @@
                 <Menu mnemonicParsing="false" text="Navigate">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Menu" onAction="#back"/>
-                        <MenuItem mnemonicParsing="false" text="test" onAction="#gotest"/>
+                        <MenuItem mnemonicParsing="false" text="Test" onAction="#gotest"/>
 
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" text="About Learning mode" />
                     </items>
                 </Menu>
             </menus>

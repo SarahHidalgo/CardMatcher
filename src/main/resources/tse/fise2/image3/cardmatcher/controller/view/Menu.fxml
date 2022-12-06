@@ -22,8 +22,8 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Navigate">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#onClickedtest" text="test" />
-                        <MenuItem mnemonicParsing="false" onAction="#onClickedApp" text="learning" />
+                        <MenuItem mnemonicParsing="false" onAction="#onClickedtest" text="Test" />
+                        <MenuItem mnemonicParsing="false" onAction="#onClickedApp" text="Learning" />
 
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
