@@ -16,7 +16,7 @@ public class CameraTest  extends Camera {
         String folder = userHome + "/test";
         FileUtil.CreateFolder(folder);
         String pictureName = super.getLabel().getText();
-        String file = folder + "/" + super.getPictureName() +".jpg" ;
+        String file = folder + "/" + super.getCard().getName() +".jpg" ;
         Rect rectCrop = new Rect(new Point(200, 80), new Point(440, 400));
         Mat crop_frame = new Mat(super.getFrame(),rectCrop);
         // Saving the image in the folder

@@ -30,6 +30,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import tse.fise2.image3.cardmatcher.util.Audio;
+import tse.fise2.image3.cardmatcher.util.MsgUtil;
 
 public abstract class Camera{
 
@@ -45,7 +47,8 @@ public abstract class Camera{
     private boolean learningmode;
     //testing mode
     private boolean testingmode;
-    private String PictureName ="classname";
+
+    private Card card= new Card("cardname");
 
     //
     private Label label = new Label();
@@ -104,7 +107,7 @@ public abstract class Camera{
 
                 // update the button content
                 if (this.learningmode || this.testingmode) {
-                    btn.setText("Capture");
+//                    btn.setText("Capture");
                 }
 
                 // close webcam when no capture taken
@@ -130,8 +133,10 @@ public abstract class Camera{
             // stop the timer
             this.stopAcquisition();
             if (this.learningmode || this.testingmode) {
+                // play sound when taking pic
+                Audio.play_sound(getClass().getResource("media/shot_sound.wav"));
                 // update again the button content
-                btn.setText("Restart Camera");
+//                btn.setText("Restart Camera");
 
                 // Name the capture and save it in a folder
                 this.showInputTextDialog();
@@ -153,6 +158,14 @@ public abstract class Camera{
 
     public abstract void saveImage( ) ;
 
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
     private void showInputTextDialog() throws InterruptedException {
         if(learningmode) {
             TextInputDialog dialog = new TextInputDialog("Write here");
@@ -163,18 +176,16 @@ public abstract class Camera{
             Optional<String> result = dialog.showAndWait();
 
             result.ifPresent(name -> {
+                card.setName(name);
                 this.label.setText(name);
                 this.saveImage();
+
             });
         }else if(testingmode)
         {
             Thread.sleep(2000);
-            Alert a = new Alert(Alert.AlertType.NONE,
-                    "This  card belongs to class X", ButtonType.OK);
+            MsgUtil.DisplayMsg("this card belongs to class "+card.getName());
 
-
-            // show the dialog
-            a.show();
             this.saveImage();
             InputStream stream = null;
             try {
@@ -258,8 +269,6 @@ public abstract class Camera{
         this.learningmode = learningmode;
     }
 
-    public String getPictureName() {
-        return PictureName;
-    }
+
 }
 

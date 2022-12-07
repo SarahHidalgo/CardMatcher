@@ -11,6 +11,7 @@ module tse.fise2.image3.cardmatcher {
     requires eu.hansolo.tilesfx;
     requires javafx.graphics;
     requires opencv;
+
     requires java.desktop;
     requires org.apache.commons.io;
 
