@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import tse.fise2.image3.cardmatcher.model.Camera;
@@ -85,16 +87,39 @@ public class LearningSceneController {
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
 //            System.out.println(selectedDirectory.getAbsolutePath());
             FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
-            MsgUtil.DisplayMsg("import success !");
+            MsgUtil.DisplayMsg("Import success !");
         }
         catch (Exception e)
         {
-            MsgUtil.DisplayMsg("import failed !");
+            MsgUtil.DisplayMsg("Import failed !");
         }
-
-
-
-
-
     }
+    public void about(ActionEvent actionEvent){       
+    	Stage stage = new Stage();
+    	
+    	//Creating a Text object 
+    	Text text = new Text();      
+
+    	//Setting the text to be added. 
+    	text.setText("Hello how are you"); 
+
+    	//setting the position of the text 
+    	text.setX(50); 
+    	text.setY(50); 
+
+    	//Creating a Group object  
+    	Group root = new Group(text);   
+
+    	//Creating a scene object 
+    	Scene scene = new Scene(root, 600, 300);  
+
+    	//Setting title to the Stage 
+    	stage.setTitle("About Learning Mode"); 
+
+    	//Adding scene to the stage 
+    	stage.setScene(scene); 
+
+    	//Displaying the contents of the stage 
+    	stage.show(); 
+    }    
 }
