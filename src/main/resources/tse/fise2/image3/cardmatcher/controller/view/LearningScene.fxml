@@ -50,10 +50,10 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <Menu mnemonicParsing="false" text="import">
+                        <Menu mnemonicParsing="false" text="Import">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="import picture" />
-                                <MenuItem mnemonicParsing="false" onAction="#importdatabase" text="import database" />
+                                <MenuItem mnemonicParsing="false" text="Import picture" />
+                                <MenuItem mnemonicParsing="false" onAction="#importdatabase" text="Import database" />
                             </items>
                         </Menu>
 
@@ -64,13 +64,13 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#back" text="Menu" />
                         <MenuItem disable="true" mnemonicParsing="false" text="Learn" />
-                        <MenuItem mnemonicParsing="false" onAction="#gotest" text="test" />
+                        <MenuItem mnemonicParsing="false" onAction="#gotest" text="Test" />
 
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" text="About Learning mode" onAction="#about" />
                     </items>
                 </Menu>
             </menus>

@@ -4,10 +4,9 @@
     -fx-font-family: Thonburi;
 }
 #appName{
+    -fx-font-size: 40px;
     -fx-text-fill:  #fff;
-    -fx-font-family: Arial Black;
-    -fx-font-size: 50px;
-    -fx-font-weight: bold;
+    -fx-font-weight-absolute: bolder;
 
 
 
@@ -31,4 +30,3 @@
     cursor: pointer;
 
 }
-
