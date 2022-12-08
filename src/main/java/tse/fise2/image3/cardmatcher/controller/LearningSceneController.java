@@ -29,6 +29,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextBoundsType;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import tse.fise2.image3.cardmatcher.model.Camera;
 import tse.fise2.image3.cardmatcher.model.CameraLearning;
@@ -94,6 +95,28 @@ public class LearningSceneController {
             if (selectedDirectory!=null) {
 //            System.out.println(selectedDirectory.getAbsolutePath());
                 FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
+                MsgUtil.DisplayMsg("Import success !");
+            }
+        }
+        catch (IOException e)
+        {
+            MsgUtil.DisplayMsg("Import failed !");
+        }
+    }
+    public void importpicture(ActionEvent actionEvent){
+        try {
+
+            Stage primaryStage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+
+
+
+
+            File selectedFile = fileChooser.showOpenDialog(primaryStage);
+            if (selectedFile!=null) {
+//            System.out.println(selectedDirectory.getAbsolutePath());
+//                FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
+                FileUtil.copyfile(selectedFile.getAbsolutePath());
                 MsgUtil.DisplayMsg("Import success !");
             }
         }

@@ -52,7 +52,7 @@
                     <items>
                         <Menu mnemonicParsing="false" text="Import">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Import picture" />
+                                <MenuItem mnemonicParsing="false" onAction="#importpicture" text="Import picture" />
                                 <MenuItem mnemonicParsing="false" onAction="#importdatabase" text="Import database" />
                             </items>
                         </Menu>
