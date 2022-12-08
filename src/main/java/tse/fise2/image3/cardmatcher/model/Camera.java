@@ -86,12 +86,12 @@ public abstract class Camera{
                         }
 
 //detection automatique-------------------------------------------------------------------------------------------------
-                         Rect rectCrop = new Rect(new Point(200, 80), new Point(440, 400));
-                        Mat crop_frame = new Mat(frame,rectCrop);
-                        if (ImageUtil.detectCard(crop_frame)) {
-
-                          Camera.this.notifyAll();
-                        }
+//                         Rect rectCrop = new Rect(new Point(200, 80), new Point(440, 400));
+//                        Mat crop_frame = new Mat(frame,rectCrop);
+//                        if (ImageUtil.detectCard(crop_frame)) {
+//
+//                          Camera.this.notifyAll();
+//                        }
 
 //----------------------------------------------------------------------------------------------------------------------
                         // convert and show the frame

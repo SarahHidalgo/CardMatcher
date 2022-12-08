@@ -91,7 +91,7 @@ public class MenuController {
         title2.setX(50); 
         title2.setY(160);
         
-        contribText.setText("This app has been made as part of the IT project of FISE2 class in Télécom Saint-Etienne. Here is a list of the main contributors to this project :\n\n Developers : \n - Coue Mélodie \n - Hidalgo Sarah\n - Ezzahrae Errami Fatima\n - Tardy Xavier\n - Chemani Nabil\n - Pontiggia Valentin \n\nProfessors :\n - Product Owner : Alimoussa Mohammed\n - Scrum Master : Peyrard Frédéric\n - Java expert : Jean Drevet Pierre\n - Image expert : Alimoussa Mohammed");
+        contribText.setText("This app has been made as part of the IT project of FISE2 class in Télécom Saint-Etienne. Here is a list of the main contributors to this project :\n\n Developers : \n - Coue Mélodie \n - Hidalgo Sarah\n - Errami Fatima Ezzahrae \n - Tardy Xavier\n - Chemani Nabil\n - Pontiggia Valentin \n\nProfessors :\n - Product Owner : Alimoussa Mohammed\n - Scrum Master : Peyrard Frédéric\n - Java expert : Jean Drevet Pierre\n - Image expert : Alimoussa Mohammed");
         contribText.setWrappingWidth(500);
         contribText.setTextAlignment(TextAlignment.JUSTIFY);
         
