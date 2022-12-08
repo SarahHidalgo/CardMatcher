@@ -3,21 +3,14 @@ package tse.fise2.image3.cardmatcher.model;
 
 
 import java.awt.*;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
+import org.opencv.core.*;
 import org.opencv.core.Point;
-import org.opencv.core.Scalar;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
@@ -31,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tse.fise2.image3.cardmatcher.util.Audio;
+import tse.fise2.image3.cardmatcher.util.ImageUtil;
 import tse.fise2.image3.cardmatcher.util.MsgUtil;
 
 public abstract class Camera{
@@ -47,6 +41,7 @@ public abstract class Camera{
     private boolean learningmode;
     //testing mode
     private boolean testingmode;
+    private Boolean auto;
 
     private Card card= new Card("cardname");
 
@@ -76,6 +71,9 @@ public abstract class Camera{
                     {
                         // grab and process a single frame
                         frame = grabFrame();
+
+
+
                         if (learningmode) {
                             // rectangle in the frame
                             Imgproc.rectangle(frame,new Point(100, 80), new Point(440, 600), new Scalar(0, 0, 255), 2);
@@ -87,6 +85,15 @@ public abstract class Camera{
 
                         }
 
+//detection automatique-------------------------------------------------------------------------------------------------
+                         Rect rectCrop = new Rect(new Point(200, 80), new Point(440, 400));
+                        Mat crop_frame = new Mat(frame,rectCrop);
+                        if (ImageUtil.detectCard(crop_frame)) {
+
+                          Camera.this.notifyAll();
+                        }
+
+//----------------------------------------------------------------------------------------------------------------------
                         // convert and show the frame
                         MatOfByte buffer1 = new MatOfByte();
                         Imgcodecs.imencode(".jpg", frame, buffer1);
@@ -101,9 +108,12 @@ public abstract class Camera{
 
                     }
                 };
+
+
                 // à revoir aussi pour bien comprendre
                 this.timer = Executors.newSingleThreadScheduledExecutor();
                 this.timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
+
 
                 // update the button content
                 if (this.learningmode || this.testingmode) {
@@ -118,36 +128,42 @@ public abstract class Camera{
                         stopAcquisition();
                     }
                 }));
+
+
             }
             else
             {
                 // log the error
                 System.err.println("Impossible to open the camera connection...");
             }
+
         }
+
+
         else
         {
+
             // the camera is not active at this point
             this.cameraActive = false;
 
             // stop the timer
             this.stopAcquisition();
             if (this.learningmode || this.testingmode) {
-                // play sound when taking pic
-                Audio.play_sound(getClass().getResource("media/shot_sound.wav"));
                 // update again the button content
 //                btn.setText("Restart Camera");
-
+                // play sound when taking pic
+                Audio.play_sound(getClass().getResource("media/shot_sound.wav"));
                 // Name the capture and save it in a folder
                 this.showInputTextDialog();
                 AddImageDetection(crframe);
-                System.out.println(this.label.getText());
+//                System.out.println(this.label.getText());
             }
         }
     }
 
     public void AddImageDetection(ImageView  det_frame)
     {
+
         imagedetection = det_frame;
     }
 
@@ -168,6 +184,7 @@ public abstract class Camera{
 
     private void showInputTextDialog() throws InterruptedException {
         if(learningmode) {
+            System.out.println("learning");
             TextInputDialog dialog = new TextInputDialog("Write here");
             dialog.setTitle("Save picture");
             dialog.setHeaderText("Enter the name of the picture ");
@@ -181,8 +198,10 @@ public abstract class Camera{
                 this.saveImage();
 
             });
+
         }else if(testingmode)
         {
+            System.out.println("test");
             Thread.sleep(2000);
             MsgUtil.DisplayMsg("this card belongs to class "+card.getName());
 
@@ -269,6 +288,9 @@ public abstract class Camera{
         this.learningmode = learningmode;
     }
 
-
+public Boolean isAuto()
+{
+    return auto;
+}
 }
 

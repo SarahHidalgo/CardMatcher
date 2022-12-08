@@ -39,6 +39,14 @@ public class FileUtil {
 
     }
 
+    public static void copyfile(String path) throws IOException {
+        String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
+        String folder = userHome + "/apprentissage";
+
+        Path targetDir = Paths.get(folder);
+        FileUtils.copyFileToDirectory(new File(path), new File(folder));
+    }
+
 
 
     }
