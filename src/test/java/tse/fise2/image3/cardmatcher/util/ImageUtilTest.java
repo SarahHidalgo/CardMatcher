@@ -18,11 +18,11 @@ class ImageUtilTest {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
         Imgcodecs imageCodecs = new Imgcodecs();
-        Mat matrix = imageCodecs.imread("/Users/mac/Desktop/hi.png");
+        Mat matrix = imageCodecs.imread("/Users/mac/Desktop/purple.png");
         assertEquals(false,ImageUtil.detectCard(matrix));
        matrix = imageCodecs.imread("/Users/mac/Desktop/white.png");
         assertEquals(true,ImageUtil.detectCard(matrix));
-        matrix = imageCodecs.imread("/Users/mac/Desktop/image.png");
-        assertEquals(false,ImageUtil.detectCard(matrix));
+        matrix = imageCodecs.imread("/Users/mac/Desktop/mix.png");
+        assertEquals(true,ImageUtil.detectCard(matrix));
     }
 }

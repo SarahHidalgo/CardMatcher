@@ -43,7 +43,7 @@ public abstract class Camera{
     private boolean testingmode;
     private Boolean auto;
 
-    private Card card= new Card("cardname");
+    private Card card= new Card("2coeur");
 
     //
     private Label label = new Label();
@@ -210,7 +210,7 @@ public abstract class Camera{
             try {
                 String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
                 String folder = userHome + "/apprentissage";
-                stream = new FileInputStream(folder+"/images.png");
+                stream = new FileInputStream(folder+"/2coeur.png");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

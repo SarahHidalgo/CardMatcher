@@ -17,7 +17,7 @@ public class CameraTest  extends Camera {
         FileUtil.CreateFolder(folder);
         String pictureName = super.getLabel().getText();
         String file = folder + "/" + super.getCard().getName() +".jpg" ;
-        Rect rectCrop = new Rect(new Point(200, 80), new Point(440, 400));
+        Rect rectCrop = new Rect(new Point(102, 83), new Point(439, 598));
         Mat crop_frame = new Mat(super.getFrame(),rectCrop);
         // Saving the image in the folder
         Imgcodecs.imwrite(file, crop_frame);
