@@ -43,7 +43,20 @@ public class Sift {
 		File[] files = folder.listFiles();
 		int fileCount = files.length;
 		System.out.println("Le dossier contient " + fileCount + " fichiers.");
-		return (card);
+	    File[] liste = folder.listFiles();
+	    int max = 0;
+	    String max_name = "";
+	    
+	    for(File item : liste){
+	    	if(descriptor(card,item.getAbsolutePath())>max)
+	    		{
+	    		
+	    		max = descriptor(card,item.getAbsolutePath());
+	    		max_name = item.getAbsolutePath();
+	    		};
+	      
+	    }
+		return (max_name);
 	}
 
     public static int descriptor(String card1,String card2) {
