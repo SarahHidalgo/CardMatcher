@@ -31,6 +31,8 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:11.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-web:19" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-web:mac:19" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:19" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:mac:19" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:11.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.dlsc.formsfx:formsfx-core:11.3.2" level="project" />
     <orderEntry type="library" name="Maven: net.synedra:validatorfx:0.1.13" level="project" />
@@ -52,16 +54,5 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac:19" level="project" />
     <orderEntry type="library" name="Maven: opencv:opencv:4.0.0-0" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:19" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:mac:19" level="project" />
-    <orderEntry type="library" name="Maven: org.primefaces:primefaces:11.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.mortbay.jetty:jetty:6.1.25" level="project" />
-    <orderEntry type="library" name="Maven: org.mortbay.jetty:jetty-util:6.1.25" level="project" />
-    <orderEntry type="library" name="Maven: org.mortbay.jetty:servlet-api:2.5-20081211" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.xml.ws:jakarta.xml.ws-api:2.3.3" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.3" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.activation:jakarta.activation-api:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.xml.soap:jakarta.xml.soap-api:1.4.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: jakarta.jws:jakarta.jws-api:2.1.0" level="project" />
   </component>
 </module>
