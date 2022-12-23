@@ -71,19 +71,18 @@ public abstract class Camera{
                     {
                         // grab and process a single frame
                         frame = grabFrame();
-
-
-
+                        Scalar scalar = new Scalar(182, 74, 108);
                         if (learningmode) {
-                            // rectangle in the frame
-                            Imgproc.rectangle(frame,new Point(100, 80), new Point(440, 600), new Scalar(0, 0, 255), 2);
+                            // definition rectangle color
+                            scalar= new Scalar(0, 0, 255);
+                            // mettre couleur de la même palette que l'appli !!
                         }
-                        if(testingmode){
-                            // rectangle in the frame
-                            Imgproc.rectangle(frame,new Point(100, 80), new Point(440, 600), new Scalar(0,255, 0), 2);
-
-
+                        else{
+                            // definition rectangle color
+                            scalar= new Scalar(182, 74, 108);
                         }
+                        //Rectangle to capture frame
+                        Imgproc.rectangle(frame,new Point(200, 80), new Point(440, 400),scalar, 1);
 
 //detection automatique-------------------------------------------------------------------------------------------------
 //                         Rect rectCrop = new Rect(new Point(200, 80), new Point(440, 400));

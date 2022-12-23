@@ -16,7 +16,7 @@ public class CameraLearning extends Camera {
         FileUtil.CreateFolder(folder);
         String pictureName = super.getLabel().getText();
         String file = folder + "/" + super.getCard().getName()+".jpg";
-        Rect rectCrop = new Rect(new Point(102, 83), new Point(439, 598));
+        Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
         Mat crop_frame = new Mat(super.getFrame(),rectCrop);
         // Saving the image in the folder
         Imgcodecs.imwrite(file, crop_frame);

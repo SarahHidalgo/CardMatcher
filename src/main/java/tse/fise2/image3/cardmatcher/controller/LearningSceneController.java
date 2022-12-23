@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 
 import javafx.event.ActionEvent;
 
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.VBox;
@@ -42,13 +43,17 @@ public class LearningSceneController {
     private Button start_btn;
     @FXML
     private Button back_btn;
-
+    @FXML
+    private MenuItem btn_nav_menu;
+    @FXML
+    private MenuItem btn_nav_test;
     @FXML
     private ImageView learningFrame;
     @FXML
     private ImageView menuFrame;
     @FXML
     private Label lab;
+
 
     public Camera capture1 = new CameraLearning();
 
@@ -65,10 +70,9 @@ public class LearningSceneController {
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
-
         Parent backLoader = FXMLLoader.load(getClass().getResource("view/Menu.fxml"));
-
-        back_btn.getScene().setRoot(backLoader);
+        Stage stage = (Stage)((MenuItem) btn_nav_menu).getParentPopup().getOwnerWindow();
+        stage.getScene().setRoot(backLoader);
 
 
     }
@@ -77,10 +81,9 @@ public class LearningSceneController {
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
-
         Parent backLoader = FXMLLoader.load(getClass().getResource("view/TestScene.fxml"));
-
-        back_btn.getScene().setRoot(backLoader);
+        Stage stage = (Stage)((MenuItem) btn_nav_test).getParentPopup().getOwnerWindow();
+        stage.getScene().setRoot(backLoader);
     }
     public void importdatabase(ActionEvent actionEvent){
         try {
@@ -93,7 +96,6 @@ public class LearningSceneController {
 
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
             if (selectedDirectory!=null) {
-//            System.out.println(selectedDirectory.getAbsolutePath());
                 FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
                 MsgUtil.DisplayMsg("Import success !");
             }
@@ -103,19 +105,15 @@ public class LearningSceneController {
             MsgUtil.DisplayMsg("Import failed !");
         }
     }
+
     public void importpicture(ActionEvent actionEvent){
         try {
 
             Stage primaryStage = new Stage();
             FileChooser fileChooser = new FileChooser();
 
-
-
-
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
             if (selectedFile!=null) {
-//            System.out.println(selectedDirectory.getAbsolutePath());
-//                FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
                 FileUtil.copyfile(selectedFile.getAbsolutePath());
                 MsgUtil.DisplayMsg("Import success !");
             }
