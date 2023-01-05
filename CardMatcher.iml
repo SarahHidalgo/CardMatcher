@@ -10,9 +10,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="19" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar:///usr/local/Cellar/opencv/4.6.0_1/share/java/opencv4/opencv-460.jar!/" />
@@ -52,7 +52,6 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:19" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:19" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac:19" level="project" />
-    <orderEntry type="library" name="Maven: opencv:opencv:4.0.0-0" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
   </component>
 </module>

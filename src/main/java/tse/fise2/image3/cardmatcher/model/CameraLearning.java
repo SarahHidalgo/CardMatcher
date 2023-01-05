@@ -19,7 +19,7 @@ public class CameraLearning extends Camera {
         String folder = userHome + "/apprentissage";
         FileUtil.CreateFolder(folder);
         String pictureName = super.getLabel().getText();
-        String file = folder + "/" + super.getCard().getName()+".jpg";
+        String file = folder + "/" + super.getCard().getName()+".png";
         Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
         Mat crop_frame = new Mat(super.getFrame(),rectCrop);
         //calcul du descripteur de l'image

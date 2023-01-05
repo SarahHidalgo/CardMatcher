@@ -6,6 +6,9 @@ public class Descriptor {
     String imageName;
     Mat descriptor;
 
+
+    public Descriptor()
+    {}
     public String getImageName() {
         return imageName;
     }

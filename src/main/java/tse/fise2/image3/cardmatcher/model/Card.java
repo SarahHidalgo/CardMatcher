@@ -4,18 +4,18 @@ import tse.fise2.image3.cardmatcher.sift.Descriptor;
 
 public class Card {
     String name;
-    Descriptor desc;
+//    Descriptor desc;
 
     public Card() {
     }
 
-    public void setDesc(Descriptor desc) {
-        this.desc = desc;
-    }
+//    public void setDesc(Descriptor desc) {
+//        this.desc = desc;
+//    }
 
-    public Descriptor getDesc() {
-        return desc;
-    }
+//    public Descriptor getDesc() {
+//        return desc;
+//    }
 
     public Card(String name) {
         this.name = name;
