@@ -4,6 +4,7 @@ import org.opencv.core.*;
 import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.SIFT;
 import org.opencv.imgcodecs.Imgcodecs;
+import tse.fise2.image3.cardmatcher.model.ScoreImage;
 import tse.fise2.image3.cardmatcher.util.FileUtil;
 
 import java.io.*;
@@ -26,15 +27,27 @@ public class Sift {
             return null;
         }
 //        Mat image = new Mat();
+//-------------------enlever ce commentaire si vous etes en version 4.0.0.0
+        // Create a SIFT feature detector and descriptor extractor
+//        FeatureDetector detector = FeatureDetector.create(FeatureDetector.SIFT);
+//        DescriptorExtractor extractor = DescriptorExtractor.create(DescriptorExtractor.SIFT);;
+//-----------------------------------------------------------------------------------------------
+
+
+//        et commentez les 2 lignes suivantes
         SIFT detector = SIFT.create();
         SIFT extractor = SIFT.create();
+//------------------------------------------------------------------------------------------------
+
+
 //        Détectez les points clés et calculez les descripteurs:
         MatOfKeyPoint keypoints = new MatOfKeyPoint();
         detector.detect(image, keypoints);
         Mat descriptors = new Mat();
         extractor.compute(image, keypoints, descriptors);
-        System.out.println(descriptors);
+        System.out.println(descriptors.size().toString());
         Descriptor des = new Descriptor(name,descriptors);
+
 
         return des;
     }
@@ -68,6 +81,7 @@ public class Sift {
     }
 
     public static List<Descriptor> readDescriptor() throws IOException {
+
         List<Descriptor> descriptorList = new ArrayList<>();
 
 
@@ -174,6 +188,7 @@ public class Sift {
      * @return  Il utilise l'algorithme de recherche de correspondance de flot de Foster (BRUTEFORCE_HAMMING) pour trouver le score de c orrespondance
      */
     public static double calculateProximityScore(Mat referenceDescriptors, Mat databaseDescriptors) {
+
 //        // Create a descriptor matcher
 //        DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
 //        // Match the reference descriptors to the database descriptors
@@ -189,36 +204,32 @@ public class Sift {
 
 
         // Trouver les correspondances entre les descripteurs
-        try {
+
             MatOfDMatch matches = new MatOfDMatch();
-            DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
+            DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
             matcher.match(referenceDescriptors, databaseDescriptors, matches);
 
             // Calculer le score de correspondance
-            double max_dist = 0;
-            double min_dist = 100;
+            double max_dist = 0; double min_dist = 100;
             DMatch[] match = matches.toArray();
-            for (int i = 0; i < referenceDescriptors.rows(); i++) {
-                double dist = match[i].distance;
-                if (dist < min_dist) min_dist = dist;
-                if (dist > max_dist) max_dist = dist;
+            for( int i = 0; i < referenceDescriptors.rows(); i++ )
+            { double dist = match[i].distance;
+                if( dist < min_dist ) min_dist = dist;
+                if( dist > max_dist ) max_dist = dist;
             }
             double proximityScore = (1 - (min_dist / max_dist));
             return proximityScore;
-        } catch (RuntimeException exp)
-        {
-            return 0;
-        }
+
 //        System.out.println("Score de correspondance: " + (1 - (min_dist / max_dist)));
     }
 
 
 
-    public static String getImageBestScore(Mat referenceDescriptors) throws IOException {
+    public static ScoreImage getImageBestScore(Mat referenceDescriptors) throws IOException {
 
         List<Descriptor> descriptorList = readDescriptor();
         String rslt ="";
-        double max =0;
+        double max = 0;
 
         for (Descriptor d :descriptorList )
         {
@@ -226,12 +237,10 @@ public class Sift {
             {
                 max = calculateProximityScore( referenceDescriptors, d.getDescriptor());
                 rslt = d.getImageName();
-
             }
 
-
         }
-        return rslt;
+        return new ScoreImage(rslt,max);
 
     }
 

@@ -99,7 +99,7 @@ public abstract class Camera{
 //----------------------------------------------------------------------------------------------------------------------
                         // convert and show the frame
                         MatOfByte buffer1 = new MatOfByte();
-                        Imgcodecs.imencode(".jpg", frame, buffer1);
+                        Imgcodecs.imencode(".png", frame, buffer1);
                         // à revoir car pas trop bien compris
                         Image imageToShow = new Image(new ByteArrayInputStream(buffer1.toArray()));
                         Platform.runLater(new Runnable() {
@@ -120,7 +120,7 @@ public abstract class Camera{
 
                 // update the button content
                 if (this.learningmode || this.testingmode) {
-//                    btn.setText("Capture");
+                   btn.setText("Capture");
                 }
 
                 // close webcam when no capture taken
@@ -153,7 +153,7 @@ public abstract class Camera{
             this.stopAcquisition();
             if (this.learningmode || this.testingmode) {
                 // update again the button content
-//                btn.setText("Restart Camera");
+                btn.setText("Restart");
                 // play sound when taking pic
                 Audio.play_sound(getClass().getResource("media/shot_sound.wav"));
                 // Name the capture and save it in a folder
@@ -215,16 +215,18 @@ public abstract class Camera{
             Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
             Mat crop_frame = new Mat(getFrame(),rectCrop);
 
+
+
+
+            Descriptor desc = Sift.getDescriptor(crop_frame, "");
             //nom de la carte ayant le meilleur score de correspondance
-            String name= Sift.getImageBestScore(crop_frame);
-
-
-            Descriptor desc = Sift.getDescriptor(crop_frame,name);
+            ScoreImage sm= Sift.getImageBestScore(desc.getDescriptor());
+            desc.setImageName(sm.getImageName());
             setDescCard(desc);
-            card.setName(name);
+            card.setName(sm.getImageName());
 
 
-            MsgUtil.DisplayMsg("this card belongs to class "+card.getName());
+            MsgUtil.DisplayMsg("this card belongs to class "+card.getName()+" with the proximity score  "+sm.getScore() );
 
             this.saveImage();
             InputStream stream = null;
@@ -232,7 +234,7 @@ public abstract class Camera{
 
                 String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
                 String folder = userHome + "/apprentissage";
-                stream = new FileInputStream(folder+"/"+name+".png");
+                stream = new FileInputStream(folder+"/"+sm.getImageName()+".png");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
