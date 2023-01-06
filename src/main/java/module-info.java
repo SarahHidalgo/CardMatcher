@@ -14,6 +14,7 @@ module tse.fise2.image3.cardmatcher {
 
     requires java.desktop;
     requires org.apache.commons.io;
+    requires java.datatransfer;
 
     opens tse.fise2.image3.cardmatcher to javafx.fxml;
     exports tse.fise2.image3.cardmatcher;

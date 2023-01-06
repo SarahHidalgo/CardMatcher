@@ -20,6 +20,20 @@ public class FileUtil {
         }
     }
 
+    public static void CreateFile(String x,String ext) {
+        File file = new File(x+"."+ext);
+
+        try {
+            if (file.createNewFile()) {
+                System.out.println("Le fichier "+x+"."+ext+" a été créé");
+            } else {
+                System.out.println("Le fichier"+ x +"."+ext+" existe déjà");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      *
      * @param path

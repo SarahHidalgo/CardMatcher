@@ -41,7 +41,7 @@ public class TestSceneController {
 
     // Event Listener on Button[#start_btn].onAction
     @FXML
-    public void startCamera(ActionEvent event) throws InterruptedException {
+    public void startCamera(ActionEvent event) throws InterruptedException, IOException {
         boolean testingmode = true;
         capture1.setTestingmode(testingmode);
         capture1.openCamera(testingFrame,start_btn);
