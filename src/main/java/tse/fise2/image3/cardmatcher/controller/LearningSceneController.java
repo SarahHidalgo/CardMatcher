@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 
 import javafx.event.ActionEvent;
 
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.VBox;
@@ -43,10 +42,7 @@ public class LearningSceneController {
     private Button start_btn;
     @FXML
     private Button back_btn;
-    @FXML
-    private MenuItem btn_nav_menu;
-    @FXML
-    private MenuItem btn_nav_test;
+
     @FXML
     private ImageView learningFrame;
     @FXML
@@ -54,12 +50,11 @@ public class LearningSceneController {
     @FXML
     private Label lab;
 
-
     public Camera capture1 = new CameraLearning();
 
     // Event Listener on Button[#start_btn].onAction
     @FXML
-    public void startCamera(ActionEvent event) throws InterruptedException, IOException {
+    public void startCamera(ActionEvent event) throws InterruptedException {
         boolean learningmode = true;
         capture1.setLearningmode(learningmode);
         capture1.openCamera(learningFrame,start_btn);
@@ -70,9 +65,10 @@ public class LearningSceneController {
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
+
         Parent backLoader = FXMLLoader.load(getClass().getResource("view/Menu.fxml"));
-        Stage stage = (Stage)((MenuItem) btn_nav_menu).getParentPopup().getOwnerWindow();
-        stage.getScene().setRoot(backLoader);
+
+        back_btn.getScene().setRoot(backLoader);
 
 
     }
@@ -81,9 +77,10 @@ public class LearningSceneController {
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
+
         Parent backLoader = FXMLLoader.load(getClass().getResource("view/TestScene.fxml"));
-        Stage stage = (Stage)((MenuItem) btn_nav_test).getParentPopup().getOwnerWindow();
-        stage.getScene().setRoot(backLoader);
+
+        back_btn.getScene().setRoot(backLoader);
     }
     public void importdatabase(ActionEvent actionEvent){
         try {
@@ -96,6 +93,7 @@ public class LearningSceneController {
 
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
             if (selectedDirectory!=null) {
+//            System.out.println(selectedDirectory.getAbsolutePath());
                 FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
                 MsgUtil.DisplayMsg("Import success !");
             }
@@ -105,15 +103,19 @@ public class LearningSceneController {
             MsgUtil.DisplayMsg("Import failed !");
         }
     }
-
     public void importpicture(ActionEvent actionEvent){
         try {
 
             Stage primaryStage = new Stage();
             FileChooser fileChooser = new FileChooser();
 
+
+
+
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
             if (selectedFile!=null) {
+//            System.out.println(selectedDirectory.getAbsolutePath());
+//                FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
                 FileUtil.copyfile(selectedFile.getAbsolutePath());
                 MsgUtil.DisplayMsg("Import success !");
             }
