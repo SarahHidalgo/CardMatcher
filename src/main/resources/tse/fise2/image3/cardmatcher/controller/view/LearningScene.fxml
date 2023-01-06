@@ -43,9 +43,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.geometry.Insets?>
-<VBox alignment="BASELINE_CENTER" prefHeight="600.0" prefWidth="850.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.LearningSceneController">    <children>
+<VBox prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.LearningSceneController">
+    <children>
 
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -63,9 +62,9 @@
 
                 <Menu mnemonicParsing="false" text="Navigate">
                     <items>
-                        <MenuItem fx:id="btn_nav_menu" mnemonicParsing="false" onAction="#back" text="Menu" />
+                        <MenuItem mnemonicParsing="false" onAction="#back" text="Menu" />
                         <MenuItem disable="true" mnemonicParsing="false" text="Learn" />
-                        <MenuItem fx:id="btn_nav_test" mnemonicParsing="false" onAction="#gotest" text="test" />
+                        <MenuItem mnemonicParsing="false" onAction="#gotest" text="Test" />
 
                     </items>
                 </Menu>
@@ -78,34 +77,30 @@
 
         </MenuBar>
 
-        <ImageView fx:id="learningFrame" fitHeight="462.0" fitWidth="767.0" pickOnBounds="true" preserveRatio="true">
-            <effect>
-                <DropShadow height="137.08" radius="58.92" spread="0.2" width="100.6" />
-            </effect>
-            <VBox.margin>
-                <Insets top="30.0" />
-            </VBox.margin>
-        </ImageView>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
-                <ImageView fitHeight="57.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                    <HBox.margin>
-                        <Insets right="5.0" />
-                    </HBox.margin>
-                    <image>
-                        <Image url="@../../images/carte1-removebg-preview.png" />
-                    </image>
-                </ImageView>
-                <Button fx:id="start_btn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startCamera" prefHeight="36.0" prefWidth="127.0" styleClass="mainbutton" text="Start Camera" />
-                <ImageView fitHeight="57.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                    <HBox.margin>
-                        <Insets left="5.0" />
-                    </HBox.margin>
-                    <image>
-                        <Image url="@../../images/carte2-removebg-preview.png" />
-                    </image>
-                </ImageView>
+                <Pane layoutX="347.0" layoutY="143.0" prefHeight="572.5" prefWidth="850.0" style="-fx-background-color: fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                  <ImageView fx:id="learningFrame" fitHeight="373.0" fitWidth="663.0" layoutX="86.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <DropShadow height="137.08" radius="58.92" spread="0.2" width="100.6" />
+                     </effect></ImageView>
+                        <Pane layoutX="86.0" layoutY="426.0" opacity="0.3" prefHeight="45.0" prefWidth="663.0" style="-fx-background-color: black;">
+                            <children>
+                                <Button fx:id="start_btn" layoutX="312.0" layoutY="8.0" mnemonicParsing="false" onAction="#startCamera" prefHeight="29.0" prefWidth="48.0" style="-fx-background-radius: 100; -fx-background-color: red;" />
+                            </children>
+                        </Pane>
+                        <Button fx:id="back_btn" layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#back" prefHeight="39.0" prefWidth="37.0" style="-fx-background-color: white;">
+                     <graphic>
+                              <ImageView fitHeight="47.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../../icons/favpng_return-icon.png" />
+                                  </image>
+                              </ImageView>
+                     </graphic></Button>
+                    </children>
+                </Pane>
             </children>
-        </HBox>
+        </AnchorPane>
     </children>
 </VBox>
