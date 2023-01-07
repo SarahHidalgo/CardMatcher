@@ -229,18 +229,18 @@ public class Sift {
 
         List<Descriptor> descriptorList = readDescriptor();
         String rslt ="";
-        double max = 0;
+        double min = 1;
 
         for (Descriptor d :descriptorList )
         {
-            if (calculateProximityScore( referenceDescriptors, d.getDescriptor())>=max )
+            if (calculateProximityScore( referenceDescriptors, d.getDescriptor())<=min  )
             {
-                max = calculateProximityScore( referenceDescriptors, d.getDescriptor());
+                min = calculateProximityScore( referenceDescriptors, d.getDescriptor());
                 rslt = d.getImageName();
             }
 
         }
-        return new ScoreImage(rslt,max);
+        return new ScoreImage(rslt,min);
 
     }
 
