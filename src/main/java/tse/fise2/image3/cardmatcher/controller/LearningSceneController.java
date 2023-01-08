@@ -8,6 +8,9 @@ import java.awt.Label;
 import java.io.File;
 import java.io.IOException;
 
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -36,6 +39,8 @@ import tse.fise2.image3.cardmatcher.model.Camera;
 import tse.fise2.image3.cardmatcher.model.CameraLearning;
 import tse.fise2.image3.cardmatcher.util.FileUtil;
 import tse.fise2.image3.cardmatcher.util.MsgUtil;
+import tse.fise2.image3.cardmatcher.sift.DatabaseDescriptors;
+import tse.fise2.image3.cardmatcher.sift.Sift;
 
 
 public class LearningSceneController {
@@ -93,11 +98,11 @@ public class LearningSceneController {
 
             directoryChooser.setInitialDirectory(new File("src"));
 
-
             File selectedDirectory = directoryChooser.showDialog(primaryStage);
             if (selectedDirectory!=null) {
                 FileUtil.copyfolder(selectedDirectory.getAbsolutePath());
-                MsgUtil.DisplayMsg("Import success !");
+                DatabaseDescriptors.extractAndSaveDescriptors(selectedDirectory.getAbsolutePath());
+                MsgUtil.DisplayMsg("Import and learning of the database success !");
             }
         }
         catch (IOException e)
@@ -115,7 +120,12 @@ public class LearningSceneController {
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
             if (selectedFile!=null) {
                 FileUtil.copyfile(selectedFile.getAbsolutePath());
-                MsgUtil.DisplayMsg("Import success !");
+                File file = new File(selectedFile.getAbsolutePath());
+                Mat image = Imgcodecs.imread(file.getAbsolutePath());
+                String name = file.getName();
+                String updatedname = name.replaceAll(".png", "");
+                Sift.saveDescriptor(Sift.getDescriptor(image, updatedname));
+                MsgUtil.DisplayMsg("Import and learning of the picture success !");
             }
         }
         catch (IOException e)

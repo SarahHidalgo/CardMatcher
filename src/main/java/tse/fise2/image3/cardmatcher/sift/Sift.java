@@ -187,7 +187,7 @@ public class Sift {
      * @param databaseDescriptors
      * @return  Il utilise l'algorithme de recherche de correspondance de flot de Foster (BRUTEFORCE_HAMMING) pour trouver le score de c orrespondance
      */
-    public static double calculateProximityScore(Mat referenceDescriptors, Mat databaseDescriptors) {
+	public static double calculateProximityScore(Mat referenceDescriptors, Mat databaseDescriptors) {
 
 //        // Create a descriptor matcher
 //        DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
