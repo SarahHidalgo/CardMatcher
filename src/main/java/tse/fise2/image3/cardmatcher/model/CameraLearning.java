@@ -4,6 +4,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
 import tse.fise2.image3.cardmatcher.model.Camera;
 import tse.fise2.image3.cardmatcher.sift.Descriptor;
 import tse.fise2.image3.cardmatcher.sift.Sift;
@@ -20,7 +21,8 @@ public class CameraLearning extends Camera {
         FileUtil.CreateFolder(folder);
         String pictureName = super.getLabel().getText();
         String file = folder + "/" + super.getCard().getName()+".png";
-        Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
+//        Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
+        Rect rectCrop = new Rect(new Point(202, 52), new Point(598, 648));
         Mat crop_frame = new Mat(super.getFrame(),rectCrop);
         //calcul du descripteur de l'image
         Descriptor desc = Sift.getDescriptor(crop_frame,super.getCard().getName());
