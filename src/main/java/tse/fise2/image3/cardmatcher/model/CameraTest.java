@@ -21,7 +21,8 @@ public class CameraTest  extends Camera {
         FileUtil.CreateFolder(folder);
         String pictureName = super.getLabel().getText();
         String file = folder + "/" + super.getCard().getName() +"Test.png" ;
-        Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
+//        Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
+        Rect rectCrop = new Rect(new Point(202, 52), new Point(598, 648));
         Mat crop_frame = new Mat(super.getFrame(),rectCrop);
 
 
