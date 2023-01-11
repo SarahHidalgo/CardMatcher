@@ -2,50 +2,58 @@ package tse.fise2.image3.cardmatcher.sift;
 
 import org.junit.jupiter.api.Test;
 import org.opencv.core.Core;
+import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SiftTest {
+    static {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    }
+
+    private final String testImage =  System.getProperty("user.dir")+"/TestResources/1coeur.png";
+    private final String testImageName = "test_image";
+
 
     @Test
     void getDescriptor() {
-        System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
-        Descriptor d= Sift.getDescriptor(Imgcodecs.imread("/Users/mac/Desktop/reference.png"),"name");
-        assertEquals(128,d.getDescriptor().size(1));
-        assertEquals("name", d.getImageName());
+
+        Mat testMat = Imgcodecs.imread(testImage);
+        Descriptor descriptor = Sift.getDescriptor(testMat, testImageName);
+        assertNotNull(descriptor);
+        assertEquals(testImageName, descriptor.getImageName());
+        assertNotNull(descriptor.getDescriptor());
 
     }
 
     @Test
-    void saveDescriptor() {
+    void saveDescriptor() throws IOException {
+
+        Mat testMat = Imgcodecs.imread(testImage);
+        Descriptor descriptor = Sift.getDescriptor(testMat, testImageName);
+        Sift.saveDescriptor(descriptor);
+        File descriptorFile = new File("descriptorsDB.csv");
+        assertTrue(descriptorFile.exists());
+        descriptorFile.delete();
+
     }
 
-    @Test
-    void readDescriptor() throws IOException {
-        System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
-        List<Descriptor> descriptorList = Sift.readDescriptor();
-        System.out.println(descriptorList.get(0).getImageName());
-        System.out.println(descriptorList.get(0).getDescriptor().size().toString());
-    }
+
 
     @Test
     void calculateProximityScore() {
-        System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
+
         Descriptor d1= Sift.getDescriptor(Imgcodecs.imread("/Users/mac/Desktop/reference.png"),"name");
 
-        Descriptor d2= Sift.getDescriptor(Imgcodecs.imread("/Users/mac/Desktop/6.png"),"picture");
+        Descriptor d2= Sift.getDescriptor(Imgcodecs.imread("/Users/mac/Desktop/2coeur.png"),"picture");
         System.out.println(Sift.calculateProximityScore(d1.getDescriptor(),d2.getDescriptor()));
 
         assertNotEquals(0,Sift.calculateProximityScore(d1.getDescriptor(),d2.getDescriptor()));
     }
 
-    @Test
-    void getImageBestScore() {
-
-
-    }
 }

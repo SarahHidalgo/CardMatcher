@@ -189,36 +189,36 @@ public class Sift {
      */
 	public static double calculateProximityScore(Mat referenceDescriptors, Mat databaseDescriptors) {
 
-//        // Create a descriptor matcher
-//        DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
-//        // Match the reference descriptors to the database descriptors
-//        MatOfDMatch matches = new MatOfDMatch();
-//        matcher.match(referenceDescriptors, databaseDescriptors, matches);
-//        // Calculate the proximity score
-//        double proximityScore = 0.0;
-//        for (DMatch match : matches.toList()) {
-//            proximityScore += match.distance;
-//        }
-//        proximityScore /= matches.size().height;
-//        return proximityScore;
+        // Create a descriptor matcher
+        DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
+        // Match the reference descriptors to the database descriptors
+        MatOfDMatch matches = new MatOfDMatch();
+        matcher.match(referenceDescriptors, databaseDescriptors, matches);
+        // Calculate the proximity score
+        double proximityScore = 0.0;
+        for (DMatch match : matches.toList()) {
+            proximityScore += match.distance;
+        }
+        proximityScore /= matches.size().height;
+        return proximityScore;
 
 
         // Trouver les correspondances entre les descripteurs
 
-            MatOfDMatch matches = new MatOfDMatch();
-            DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
-            matcher.match(referenceDescriptors, databaseDescriptors, matches);
-
-            // Calculer le score de correspondance
-            double max_dist = 0; double min_dist = 100;
-            DMatch[] match = matches.toArray();
-            for( int i = 0; i < referenceDescriptors.rows(); i++ )
-            { double dist = match[i].distance;
-                if( dist < min_dist ) min_dist = dist;
-                if( dist > max_dist ) max_dist = dist;
-            }
-            double proximityScore = (1 - (min_dist / max_dist));
-            return proximityScore;
+//            MatOfDMatch matches = new MatOfDMatch();
+//            DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
+//            matcher.match(referenceDescriptors, databaseDescriptors, matches);
+//
+//            // Calculer le score de correspondance
+//            double max_dist = 0; double min_dist = 100;
+//            DMatch[] match = matches.toArray();
+//            for( int i = 0; i < referenceDescriptors.rows(); i++ )
+//            { double dist = match[i].distance;
+//                if( dist < min_dist ) min_dist = dist;
+//                if( dist > max_dist ) max_dist = dist;
+//            }
+//            double proximityScore = (1 - (min_dist / max_dist));
+//            return proximityScore;
 
 //        System.out.println("Score de correspondance: " + (1 - (min_dist / max_dist)));
     }
@@ -229,7 +229,7 @@ public class Sift {
 
         List<Descriptor> descriptorList = readDescriptor();
         String rslt ="";
-        double min = 1;
+        double min = 10000;
 
         for (Descriptor d :descriptorList )
         {

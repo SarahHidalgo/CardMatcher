@@ -21,10 +21,12 @@ public class DatabaseDescriptors {
         // Get the SIFT descriptors of each image
         for (File file : files) {
             Mat image = Imgcodecs.imread(file.getAbsolutePath());
-            String name = file.getName();
-            String updatedname = name.replaceAll(".png", "");
-            Descriptor descriptor = Sift.getDescriptor(image,updatedname);
-            descriptorsList.add(descriptor);
+            if (!image.empty()) {
+                String name = file.getName();
+                String updatedname = name.replaceAll(".png", "");
+                Descriptor descriptor = Sift.getDescriptor(image, updatedname);
+                descriptorsList.add(descriptor);
+            }
         }
 
         // Write the SIFT descriptors to the CSV file
