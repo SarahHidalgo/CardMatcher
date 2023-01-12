@@ -164,7 +164,7 @@ public class Sift {
         }
 
 
-        // pour ajouter le dernier descripyeur
+        // pour ajouter le dernier descripteur
         if(i>0) {
             Mat mat = new Mat(data.size(), data.get(0).length, CvType.CV_32F);
             for (int j = 0; j < data.size(); j++) {

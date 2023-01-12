@@ -86,8 +86,13 @@ public abstract class Camera{
                             scalar= new Scalar(0, 255, 0);
                         }
                         //Rectangle to capture frame
-                       // Imgproc.rectangle(frame,new Point(200, 80), new Point(440, 400),scalar, 1);
-                        Imgproc.rectangle(frame,new Point(200, 50), new Point(600, 650),scalar, 1);
+                        String SE = System.getProperty("os.name").toLowerCase();
+                        if (SE.indexOf("win") >= 0) {
+                        	Imgproc.rectangle(frame,new Point(200, 80), new Point(440, 400),scalar, 1);
+                        }
+                        else {
+                        	Imgproc.rectangle(frame,new Point(200, 50), new Point(600, 650),scalar, 1);
+                        }
 
 //detection automatique-------------------------------------------------------------------------------------------------
 //                         Rect rectCrop = new Rect(new Point(200, 80), new Point(440, 400));

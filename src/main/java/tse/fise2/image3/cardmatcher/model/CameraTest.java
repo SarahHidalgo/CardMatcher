@@ -21,9 +21,18 @@ public class CameraTest  extends Camera {
         FileUtil.CreateFolder(folder);
         String pictureName = super.getLabel().getText();
         String file = folder + "/" + super.getCard().getName() +"Test.png" ;
-//        Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
-        Rect rectCrop = new Rect(new Point(202, 52), new Point(598, 648));
-        Mat crop_frame = new Mat(super.getFrame(),rectCrop);
+        String SE = System.getProperty("os.name").toLowerCase();
+        if (SE.indexOf("win") >= 0) {
+        	Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
+        	Mat crop_frame = new Mat(super.getFrame(),rectCrop);
+        	Imgcodecs.imwrite(file, crop_frame);
+        }
+        else {
+        	Rect rectCrop = new Rect(new Point(202, 52), new Point(598, 648));
+        	Mat crop_frame = new Mat(super.getFrame(),rectCrop);
+        	Imgcodecs.imwrite(file, crop_frame);
+        }
+        
 
 
 //        Descriptor desc = Sift.getDescriptor(crop_frame,super.getCard().getName());
@@ -31,7 +40,7 @@ public class CameraTest  extends Camera {
 
 
         // Saving the image in the folder
-        Imgcodecs.imwrite(file, crop_frame);
+        
 
 
     }
