@@ -19,7 +19,7 @@
             <Menu mnemonicParsing="false" text="Navigate">
                <items>
                   <MenuItem fx:id="btn_nav_menu" mnemonicParsing="false" onAction="#back" text="Menu" />
-                  <MenuItem disable="true" mnemonicParsing="false" text="Learn" />
+                  <MenuItem fx:id="btn_nav_learn" mnemonicParsing="false" onAction="#golearn" text="Learn" />
                   <MenuItem fx:id="btn_nav_test" mnemonicParsing="false" onAction="#gotest" text="Test" />
                </items>
             </Menu>

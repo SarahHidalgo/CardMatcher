@@ -265,4 +265,13 @@ public class LearningSceneController implements Initializable {
             base.searchFieldProperty(search_field, mylistview,"apprentissage");
         }
     }
+
+    public void golearn(ActionEvent actionEvent) throws IOException {
+        capture1.setCameraActive(false);
+        // stop the timer
+        capture1.stopAcquisition();
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/LearningScene.fxml"));
+        Stage stage = (Stage)((MenuItem) btn_nav_test).getParentPopup().getOwnerWindow();
+        stage.getScene().setRoot(backLoader);
+    }
 }

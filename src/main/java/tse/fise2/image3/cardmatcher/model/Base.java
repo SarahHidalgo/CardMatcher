@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import tse.fise2.image3.cardmatcher.util.FileUtil;
 
 /*
  * Class permettant de gérer la navigation dans les bases
@@ -81,6 +82,7 @@ public class Base {
     }
 
     public void initializeList(URL arg0, ResourceBundle arg1, ListView<String> mylistview, Label label_base,ImageView image_base,String baseName) {
+        FileUtil.CreateFolder(baseName);
         ObservableList<String> listeArray = displayBase(baseName);
         mylistview.getItems().addAll(listeArray);
         // add listener to display image on click

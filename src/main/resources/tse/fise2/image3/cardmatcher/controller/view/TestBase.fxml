@@ -21,7 +21,8 @@
                <items>
                   <MenuItem fx:id="btn_nav_menu" mnemonicParsing="false" onAction="#back" text="Menu" />
                   <MenuItem fx:id="btn_nav_learn" mnemonicParsing="false" onAction="#goLearn" text="Learn" />
-                  <MenuItem disable="true" mnemonicParsing="false" text="Learn" />
+                  <MenuItem fx:id="btn_nav_test" mnemonicParsing="false" onAction="#goTest" text="Test" />
+
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Base">
