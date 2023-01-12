@@ -7,7 +7,14 @@ import java.awt.Label;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
@@ -35,6 +42,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import tse.fise2.image3.cardmatcher.model.Base;
 import tse.fise2.image3.cardmatcher.model.Camera;
 import tse.fise2.image3.cardmatcher.model.CameraLearning;
 import tse.fise2.image3.cardmatcher.util.FileUtil;
@@ -43,7 +51,7 @@ import tse.fise2.image3.cardmatcher.sift.DatabaseDescriptors;
 import tse.fise2.image3.cardmatcher.sift.Sift;
 
 
-public class LearningSceneController {
+public class LearningSceneController implements Initializable {
     @FXML
     private Button start_btn;
     @FXML
@@ -58,9 +66,25 @@ public class LearningSceneController {
     private ImageView menuFrame;
     @FXML
     private Label lab;
+    @FXML
+    private MenuItem btn_learningbase;
+    @FXML
+    private ImageView image_base;
+    @FXML
+    private ImageView img_saved = new ImageView();
+    @FXML
+    private ListView<String> mylistview = new ListView<String>();
+
+    @FXML
+    private javafx.scene.control.Label name_saved_card;
+    @FXML
+    private javafx.scene.control.Label label_base_learning;
+    @FXML
+    private TextField search_field;
 
 
     public Camera capture1 = new CameraLearning();
+    public Base base= new Base();
 
     // Event Listener on Button[#start_btn].onAction
     @FXML
@@ -202,5 +226,43 @@ public class LearningSceneController {
            
         //Displaying the contents of the stage 
         stage.show(); 
-     }    
+     }
+
+
+
+    @FXML
+    public void goLearnBase(ActionEvent actionEvent) throws IOException{
+        capture1.stopAcquisition();
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/LearningBase.fxml"));
+        Stage stage = (Stage)((MenuItem) btn_learningbase).getParentPopup().getOwnerWindow();
+        stage.getScene().setRoot(backLoader);
+    }
+
+    /*Fonction servant à l'actualisation de l'affichage de l'image enregistrée précédente
+     * ainsi que l'affichage de la liste de la base d'apprentissage
+     *
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        if (start_btn!=null){
+            start_btn.setOnMouseClicked(new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    // affiche carte enregistrée précédente
+                    String card_name= capture1.getCard().getName();
+                    name_saved_card.setText(card_name);
+                    //System.out.println("Nom de la carte enregistrée: " + card_name);
+                    String path = System.getProperty("user.dir")+ "/apprentissage/"+ card_name + ".jpg";
+                    //System.out.println("chemin : " + path);
+                    base.displayImage(path, img_saved);
+                }
+            });
+        }
+        base.initializeList(arg0, arg1, mylistview, label_base_learning, image_base,"apprentissage");
+        //add Listener to filterInput TextField
+        if (search_field!=null) {
+            base.searchFieldProperty(search_field, mylistview,"apprentissage");
+        }
+    }
 }

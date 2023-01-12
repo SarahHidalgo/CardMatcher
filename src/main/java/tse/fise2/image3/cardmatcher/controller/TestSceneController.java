@@ -1,4 +1,6 @@
 package tse.fise2.image3.cardmatcher.controller;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,14 +16,17 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import tse.fise2.image3.cardmatcher.model.Base;
 import tse.fise2.image3.cardmatcher.model.Camera;
 
 import tse.fise2.image3.cardmatcher.model.CameraTest;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class TestSceneController {
+public class TestSceneController   implements Initializable {
 
     @FXML
     private ImageView testingFrame;
@@ -36,9 +41,20 @@ public class TestSceneController {
     @FXML
     private Label lab;
 
+    @FXML
+    private MenuItem btn_testbase;
+    @FXML
+    private javafx.scene.control.Label label_base_test;
+    @FXML
+    private ListView<String> mylistview = new ListView<String>();
+    @FXML
+    private ImageView image_base = new ImageView();
+    @FXML
+    private javafx.scene.control.TextField search_field = new javafx.scene.control.TextField();
+
     public ImageView detect_frame;
     public Camera capture1 = new CameraTest();
-
+    public Base base= new Base();
     // Event Listener on Button[#start_btn].onAction
     @FXML
     public void startCamera(ActionEvent event) throws InterruptedException, IOException {
@@ -146,5 +162,22 @@ public class TestSceneController {
            
         //Displaying the contents of the stage 
         stage.show(); 
-     } 
+     }
+
+    public void goTestBase(ActionEvent actionEvent) throws IOException{
+        capture1.stopAcquisition();
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/TestBase.fxml"));
+        Stage stage = (Stage)((MenuItem) btn_testbase).getParentPopup().getOwnerWindow();
+        stage.getScene().setRoot(backLoader);
+    }
+
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        base.initializeList(arg0, arg1, mylistview, label_base_test, image_base,"test");
+        //add Listener to filterInput TextField
+        if (search_field !=null) {
+            base.searchFieldProperty(search_field, mylistview,"test");
+        }
+    }
 }
