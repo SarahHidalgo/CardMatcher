@@ -52,6 +52,11 @@
 
                     </items>
                 </Menu>
+                <Menu mnemonicParsing="false" text="Base">
+                    <items>
+                        <MenuItem fx:id="btn_testbase" mnemonicParsing="false" onAction="#goTestBase" text="Base test" />
+                    </items>
+                </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
                         <MenuItem mnemonicParsing="false" text="About Test mode" onAction="#about" />

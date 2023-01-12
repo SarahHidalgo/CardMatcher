@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="BASELINE_CENTER" prefHeight="600.0" prefWidth="1201.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.LearningSceneController">
+   <children>
+      <MenuBar VBox.vgrow="NEVER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Navigate">
+               <items>
+                  <MenuItem fx:id="btn_nav_menu" mnemonicParsing="false" onAction="#back" text="Menu" />
+                  <MenuItem fx:id="btn_nav_learn" mnemonicParsing="false" onAction="#golearn" text="Learn" />
+                  <MenuItem fx:id="btn_nav_test" mnemonicParsing="false" onAction="#gotest" text="Test" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+                  <Menu mnemonicParsing="false" text="import">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="import picture" />
+                        <MenuItem mnemonicParsing="false" onAction="#importdatabase" text="import database" />
+                     </items>
+                  </Menu>
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Base">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Base d'Apprentissage" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <HBox alignment="CENTER" prefHeight="578.0" prefWidth="992.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="454.0" prefWidth="463.0">
+               <children>
+                  <TextField fx:id="search_field" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="466.0" promptText="Search" />
+                  <ListView fx:id="mylistview" prefHeight="369.0" prefWidth="397.0" />
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="454.0" prefWidth="216.0">
+               <children>
+                  <Label text="Image Sélectionnée">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ImageView fx:id="image_base" fitHeight="259.0" fitWidth="197.0" pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </ImageView>
+                  <Label fx:id="label_base_learning" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="126.0">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
