@@ -4,6 +4,7 @@ package tse.fise2.image3.cardmatcher.model;
 
 import java.awt.*;
 import java.io.*;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -54,6 +55,8 @@ public abstract class Camera{
     //
     private Mat frame = new Mat();
     private ImageView imagedetection;
+    private ImageView imagedetection2;
+    private ImageView imagedetection3;
 
 
     public void openCamera(ImageView crframe, Button btn) throws InterruptedException, IOException {
@@ -174,6 +177,18 @@ public abstract class Camera{
 
         imagedetection = det_frame;
     }
+    public void AddImageDetection2(ImageView  det_frame)
+    {
+
+        imagedetection2 = det_frame;
+    }
+
+    public void AddImageDetection3(ImageView  det_frame)
+    {
+
+        imagedetection3 = det_frame;
+    }
+
 
     public void setTestingmode(boolean testingmode) {
         this.testingmode = testingmode;
@@ -221,26 +236,32 @@ public abstract class Camera{
 
              Descriptor desc = Sift.getDescriptor(crop_frame, "");
              //nom de la carte ayant le meilleur score de correspondance
-             ScoreImage sm= Sift.getImageBestScore(desc.getDescriptor());
-             desc.setImageName(sm.getImageName());
+            List<ScoreImage> l_scoreImage= Sift.getTop3ImageBestScore(desc.getDescriptor());
+             desc.setImageName(l_scoreImage.get(0).getImageName());
              setDescCard(desc);
-             card.setName(sm.getImageName());
+             card.setName(l_scoreImage.get(0).getImageName());
 
 
-             MsgUtil.DisplayMsg("this card belongs to class "+card.getName()+" with the proximity score  "+sm.getScore() );
-
+             MsgUtil.DisplayMsg("this card belongs to class "+card.getName()+" with the proximity score  "+l_scoreImage.get(0).getScore() );
              this.saveImage();
+
              InputStream stream = null;
+            InputStream stream2 = null;
+            InputStream stream3 = null;
              try {
 
                  String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
                  String folder = userHome + "/apprentissage";
-                 stream = new FileInputStream(folder+"/"+sm.getImageName()+".png");
+                 stream = new FileInputStream(folder+"/"+l_scoreImage.get(0).getImageName()+".png");
+                 stream2= new FileInputStream(folder+"/"+l_scoreImage.get(1).getImageName()+".png");
+                 stream3= new FileInputStream(folder+"/"+l_scoreImage.get(2).getImageName()+".png");
              } catch (FileNotFoundException e) {
                  e.printStackTrace();
              }
-             best_image = new Image(stream);
-             imagedetection.setImage(best_image);
+
+             imagedetection.setImage( new Image(stream));
+            imagedetection2.setImage( new Image(stream2));
+            imagedetection3.setImage( new Image(stream3));
         }
 
     }

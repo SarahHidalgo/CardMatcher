@@ -61,6 +61,8 @@ public class TestSceneController implements Initializable {
     private javafx.scene.control.TextField search_field = new javafx.scene.control.TextField();
 
     public ImageView detect_frame;
+    public ImageView detect_frame2;
+    public ImageView detect_frame3;
     public Camera capture1 = new CameraTest();
     public Base base= new Base();
     // Event Listener on Button[#start_btn].onAction
@@ -70,6 +72,9 @@ public class TestSceneController implements Initializable {
         capture1.setTestingmode(testingmode);
         capture1.openCamera(testingFrame,start_btn);
         capture1.AddImageDetection(detect_frame);
+        capture1.AddImageDetection2(detect_frame2);
+        capture1.AddImageDetection3(detect_frame3);
+
     }
 
     public void back(ActionEvent actionEvent)  throws IOException {
