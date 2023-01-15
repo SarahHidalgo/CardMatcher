@@ -10,6 +10,8 @@ import tse.fise2.image3.cardmatcher.sift.Descriptor;
 import tse.fise2.image3.cardmatcher.sift.Sift;
 import tse.fise2.image3.cardmatcher.util.FileUtil;
 
+import java.io.File;
+
 public class CameraTest  extends Camera {
     @Override
     public void saveImage() {
@@ -20,7 +22,12 @@ public class CameraTest  extends Camera {
         String folder = userHome + "/test";
         FileUtil.CreateFolder(folder);
         String pictureName = super.getLabel().getText();
-        String file = folder + "/" + super.getCard().getName() +"Test.png" ;
+        String file = folder + "/" + super.getCard().getName();
+        int i = 1;
+        while(new File(file + "Test" + i + ".png").exists()){
+            i++;
+        }
+        file += "Test" + i + ".png";
         String SE = System.getProperty("os.name").toLowerCase();
         if (SE.indexOf("win") >= 0) {
         	Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
