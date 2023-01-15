@@ -4,6 +4,7 @@ package tse.fise2.image3.cardmatcher.model;
 
 import java.awt.*;
 import java.io.*;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -47,12 +48,15 @@ public abstract class Camera{
 
     private Card card= new Card("2coeur");
     private Descriptor descCard;
+    public Image best_image;
 
     //
     private Label label = new Label();
     //
     private Mat frame = new Mat();
     private ImageView imagedetection;
+    private ImageView imagedetection2;
+    private ImageView imagedetection3;
 
 
     public void openCamera(ImageView crframe, Button btn) throws InterruptedException, IOException {
@@ -83,10 +87,16 @@ public abstract class Camera{
                         }
                         else{
                             // definition rectangle color
-                            scalar= new Scalar(182, 74, 108);
+                            scalar= new Scalar(0, 255, 0);
                         }
                         //Rectangle to capture frame
-                        Imgproc.rectangle(frame,new Point(200, 80), new Point(440, 400),scalar, 1);
+                        String SE = System.getProperty("os.name").toLowerCase();
+                        if (SE.indexOf("win") >= 0) {
+                        	Imgproc.rectangle(frame,new Point(200, 80), new Point(440, 400),scalar, 1);
+                        }
+                        else {
+                        	Imgproc.rectangle(frame,new Point(200, 50), new Point(600, 650),scalar, 1);
+                        }
 
 //detection automatique-------------------------------------------------------------------------------------------------
 //                         Rect rectCrop = new Rect(new Point(200, 80), new Point(440, 400));
@@ -112,8 +122,6 @@ public abstract class Camera{
                     }
                 };
 
-
-                // à revoir aussi pour bien comprendre
                 this.timer = Executors.newSingleThreadScheduledExecutor();
                 this.timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
 
@@ -169,6 +177,18 @@ public abstract class Camera{
 
         imagedetection = det_frame;
     }
+    public void AddImageDetection2(ImageView  det_frame)
+    {
+
+        imagedetection2 = det_frame;
+    }
+
+    public void AddImageDetection3(ImageView  det_frame)
+    {
+
+        imagedetection3 = det_frame;
+    }
+
 
     public void setTestingmode(boolean testingmode) {
         this.testingmode = testingmode;
@@ -208,40 +228,40 @@ public abstract class Camera{
 
         }else if(testingmode)
         {
-//            System.out.println("test");
             Thread.sleep(2000);
 
-           //calcul du descripteur de l'image test
-            Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
-            Mat crop_frame = new Mat(getFrame(),rectCrop);
+            //calcul du descripteur de l'image test
+             Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
+             Mat crop_frame = new Mat(getFrame(),rectCrop);
+
+             Descriptor desc = Sift.getDescriptor(crop_frame, "");
+             //nom de la carte ayant le meilleur score de correspondance
+            List<ScoreImage> l_scoreImage= Sift.getTop3ImageBestScore(desc.getDescriptor());
+             desc.setImageName(l_scoreImage.get(0).getImageName());
+             setDescCard(desc);
+             card.setName(l_scoreImage.get(0).getImageName());
 
 
+             MsgUtil.DisplayMsg("this card belongs to class "+card.getName()+" with the proximity score  "+l_scoreImage.get(0).getScore() );
+             this.saveImage();
 
+             InputStream stream = null;
+            InputStream stream2 = null;
+            InputStream stream3 = null;
+             try {
 
-            Descriptor desc = Sift.getDescriptor(crop_frame, "");
-            //nom de la carte ayant le meilleur score de correspondance
-            ScoreImage sm= Sift.getImageBestScore(desc.getDescriptor());
-            desc.setImageName(sm.getImageName());
-            setDescCard(desc);
-            card.setName(sm.getImageName());
+                 String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
+                 String folder = userHome + "/apprentissage";
+                 stream = new FileInputStream(folder+"/"+l_scoreImage.get(0).getImageName()+".png");
+                 stream2= new FileInputStream(folder+"/"+l_scoreImage.get(1).getImageName()+".png");
+                 stream3= new FileInputStream(folder+"/"+l_scoreImage.get(2).getImageName()+".png");
+             } catch (FileNotFoundException e) {
+                 e.printStackTrace();
+             }
 
-
-            MsgUtil.DisplayMsg("this card belongs to class "+card.getName()+" with the proximity score  "+sm.getScore() );
-
-            this.saveImage();
-            InputStream stream = null;
-            try {
-
-                String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
-                String folder = userHome + "/apprentissage";
-                stream = new FileInputStream(folder+"/"+sm.getImageName()+".png");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            Image image = new Image(stream);
-            imagedetection.setImage(image);
-
-
+             imagedetection.setImage( new Image(stream));
+            imagedetection2.setImage( new Image(stream2));
+            imagedetection3.setImage( new Image(stream3));
         }
 
     }

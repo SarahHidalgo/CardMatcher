@@ -7,9 +7,9 @@ import java.net.URL;
 import org.opencv.core.Core;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -35,6 +35,8 @@ public class App extends Application {
             primaryStage.setScene(scene);
             //full screen automatic
             primaryStage.setMaximized(true);
+            // window icon
+            primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("icons/CardMatcherLogo.png")));
 //            primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
 //                public void handle(WindowEvent we)
 //                {

@@ -31,9 +31,9 @@ public class MenuController {
     public void onClickedApp(ActionEvent event) throws IOException {
 
 
-        Parent modeTest = FXMLLoader.load(getClass().getResource("view/LearningScene.fxml"));
+        Parent modeApp = FXMLLoader.load(getClass().getResource("view/LearningScene.fxml"));
 
-        btn_app.getScene().setRoot(modeTest);
+        btn_app.getScene().setRoot(modeApp);
 
 
     }

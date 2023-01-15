@@ -1,111 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.HBox?>
-<?import javafx.geometry.Insets?>
-<VBox alignment="BASELINE_CENTER" prefHeight="600.0" prefWidth="850.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.LearningSceneController">    <children>
+<VBox alignment="BASELINE_CENTER" prefHeight="600.0" prefWidth="1136.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.LearningSceneController">
+    <children>
 
-        <MenuBar VBox.vgrow="NEVER">
+        <MenuBar prefHeight="0.0" prefWidth="851.0" VBox.vgrow="NEVER">
             <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <Menu mnemonicParsing="false" text="Import">
-                            <items>
-                                <MenuItem mnemonicParsing="false" onAction="#importpicture" text="Import picture" />
-                                <MenuItem mnemonicParsing="false" onAction="#importdatabase" text="Import database" />
-                            </items>
-                        </Menu>
-
-                    </items>
-                </Menu>
 
                 <Menu mnemonicParsing="false" text="Navigate">
                     <items>
                         <MenuItem fx:id="btn_nav_menu" mnemonicParsing="false" onAction="#back" text="Menu" />
                         <MenuItem disable="true" mnemonicParsing="false" text="Learn" />
-                        <MenuItem fx:id="btn_nav_test" mnemonicParsing="false" onAction="#gotest" text="test" />
+                        <MenuItem fx:id="btn_nav_test" mnemonicParsing="false" onAction="#gotest" text="Test" />
 
                     </items>
                 </Menu>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <Menu mnemonicParsing="false" text="import">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#importpicture" text="import picture" />
+                                <MenuItem mnemonicParsing="false" onAction="#importdatabase" text="import database" />
+                            </items>
+                        </Menu>
+
+                    </items>
+                </Menu>
+            <Menu mnemonicParsing="false" text="Base">
+              <items>
+                  <MenuItem fx:id="btn_learningbase" mnemonicParsing="false" onAction="#goLearnBase" text="Base d'Apprentissage" />
+              </items>
+            </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About Learning mode" onAction="#about" />
+                        <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
                     </items>
                 </Menu>
             </menus>
 
         </MenuBar>
-
-        <ImageView fx:id="learningFrame" fitHeight="462.0" fitWidth="767.0" pickOnBounds="true" preserveRatio="true">
-            <effect>
-                <DropShadow height="137.08" radius="58.92" spread="0.2" width="100.6" />
-            </effect>
-            <VBox.margin>
-                <Insets top="30.0" />
-            </VBox.margin>
-        </ImageView>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-            <children>
-                <ImageView fitHeight="57.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                    <HBox.margin>
-                        <Insets right="5.0" />
-                    </HBox.margin>
-                    <image>
-                        <Image url="@../../images/carte1-removebg-preview.png" />
-                    </image>
-                </ImageView>
-                <Button fx:id="start_btn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startCamera" prefHeight="36.0" prefWidth="127.0" styleClass="mainbutton" text="Start Camera" />
-                <ImageView fitHeight="57.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                    <HBox.margin>
-                        <Insets left="5.0" />
-                    </HBox.margin>
-                    <image>
-                        <Image url="@../../images/carte2-removebg-preview.png" />
-                    </image>
-                </ImageView>
-            </children>
-        </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="learningFrame" fitHeight="462.0" fitWidth="693.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <DropShadow height="137.08" radius="58.92" spread="0.2" width="100.6" />
+               </effect>
+               <HBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="195.0" text="Dernière image enregistrée">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ImageView fx:id="img_saved" fitHeight="260.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="name_saved_card" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="168.0">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets top="35.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="57.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../../images/carte1-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="start_btn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startCamera" prefHeight="36.0" prefWidth="127.0" styleClass="mainbutton" text="Start Camera" />
+            <ImageView fitHeight="57.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../../images/carte2-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
     </children>
 </VBox>

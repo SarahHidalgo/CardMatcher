@@ -8,22 +8,21 @@
     -fx-font-family: Arial Black;
     -fx-font-size: 50px;
     -fx-font-weight: bold;
-
-
-
 }
 .title{
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #6C4AB6, #B9E0FF);
 
 }
-
+.button{
+	-fx-background-color:#8D9EFF;
+    -fx-text-fill:  #001253;
+    -fx-background-radius: 10px;
+}
 .mainbutton{
     -fx-background-color:#8D9EFF;
     -fx-text-fill:  #001253;
     -fx-background-radius: 15px;
     -fx-font-weight: bold;
-
-
 }
 .mainbutton:hover{
     -fx-background-color: #001253;
@@ -31,4 +30,10 @@
     cursor: pointer;
 
 }
+#detect_frame2{
+    -fx-opacity: 0.7;
+}
 
+#detect_frame3{
+    -fx-opacity: 0.4;
+}

@@ -1,4 +1,6 @@
 package tse.fise2.image3.cardmatcher.controller;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -14,14 +17,17 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import tse.fise2.image3.cardmatcher.model.Base;
 import tse.fise2.image3.cardmatcher.model.Camera;
 
 import tse.fise2.image3.cardmatcher.model.CameraTest;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class TestSceneController {
+public class TestSceneController implements Initializable {
 
     @FXML
     private ImageView testingFrame;
@@ -30,15 +36,35 @@ public class TestSceneController {
     @FXML
     private Button back_btn;
     @FXML
+    private MenuItem btn_testbase;
+    @FXML
     private MenuItem btn_nav_learn;
     @FXML
     private MenuItem btn_nav_menu;
     @FXML
     private Label lab;
+    @FXML
+    private Label label_carte;
+    @FXML
+    private Label label_small_card;
+    @FXML
+    private Label label_base_app;
+    @FXML
+    private javafx.scene.control.Label label_base_test;
+    @FXML
+    private ListView<String> mylistview = new ListView<String>();
+    @FXML
+    private ImageView image_base = new ImageView();
+    @FXML
+	private ImageView small_img_card = new ImageView();
+    @FXML
+    private javafx.scene.control.TextField search_field = new javafx.scene.control.TextField();
 
     public ImageView detect_frame;
+    public ImageView detect_frame2;
+    public ImageView detect_frame3;
     public Camera capture1 = new CameraTest();
-
+    public Base base= new Base();
     // Event Listener on Button[#start_btn].onAction
     @FXML
     public void startCamera(ActionEvent event) throws InterruptedException, IOException {
@@ -46,16 +72,8 @@ public class TestSceneController {
         capture1.setTestingmode(testingmode);
         capture1.openCamera(testingFrame,start_btn);
         capture1.AddImageDetection(detect_frame);
-    }
-
-    /**
-     * When this method is called, it will switch scene from Menu to MainScene
-     */
-    @FXML
-    public void onClickedApp(ActionEvent event) throws IOException {
-        capture1.setCameraActive(false);
-        // stop the timer
-        capture1.stopAcquisition();
+        capture1.AddImageDetection2(detect_frame2);
+        capture1.AddImageDetection3(detect_frame3);
 
     }
 
@@ -76,6 +94,23 @@ public class TestSceneController {
         Stage stage = (Stage)((MenuItem) btn_nav_learn).getParentPopup().getOwnerWindow();
         stage.getScene().setRoot(backLoader);
     }
+
+    public void goTestBase(ActionEvent actionEvent) throws IOException{
+        capture1.stopAcquisition();
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/TestBase.fxml"));
+        Stage stage = (Stage)((MenuItem) btn_testbase).getParentPopup().getOwnerWindow();
+        stage.getScene().setRoot(backLoader);
+    }
+    
+    public void goTest(ActionEvent actionEvent) throws IOException {
+        capture1.setCameraActive(false);
+        // stop the timer
+        capture1.stopAcquisition();
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/TestScene.fxml"));
+        Stage stage = (Stage)((MenuItem) btn_nav_learn).getParentPopup().getOwnerWindow();
+        stage.getScene().setRoot(backLoader);
+    }
+
     public void about(ActionEvent actionEvent) {       
     	Stage stage = new Stage();
     	
@@ -146,5 +181,26 @@ public class TestSceneController {
            
         //Displaying the contents of the stage 
         stage.show(); 
-     } 
+     }
+
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        base.initializeList(arg0, arg1, mylistview, label_carte, label_small_card, label_base_test, image_base, small_img_card,"test");
+        //add Listener to filterInput TextField
+        if (search_field !=null) {
+            base.searchFieldProperty(search_field, mylistview,"test");
+        }
+    }
+	public void displayCorrespondance(ActionEvent actionEvent) {
+		base.setCorrespondance(true);
+		base.displayCorres(label_carte, label_small_card, label_base_test, image_base, small_img_card);
+
+    }
+	public void displayPtsInterets(ActionEvent actionEvent) {
+		base.displayPtsInteretsCard(label_base_test, label_small_card, small_img_card, image_base);
+	}
+    
+
+
 }

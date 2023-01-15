@@ -9,6 +9,7 @@ import tse.fise2.image3.cardmatcher.util.FileUtil;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -164,7 +165,7 @@ public class Sift {
         }
 
 
-        // pour ajouter le dernier descripyeur
+        // pour ajouter le dernier descripteur
         if(i>0) {
             Mat mat = new Mat(data.size(), data.get(0).length, CvType.CV_32F);
             for (int j = 0; j < data.size(); j++) {
@@ -187,61 +188,74 @@ public class Sift {
      * @param databaseDescriptors
      * @return  Il utilise l'algorithme de recherche de correspondance de flot de Foster (BRUTEFORCE_HAMMING) pour trouver le score de c orrespondance
      */
-    public static double calculateProximityScore(Mat referenceDescriptors, Mat databaseDescriptors) {
+	public static double calculateProximityScore(Mat referenceDescriptors, Mat databaseDescriptors) {
 
-//        // Create a descriptor matcher
-//        DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
-//        // Match the reference descriptors to the database descriptors
-//        MatOfDMatch matches = new MatOfDMatch();
-//        matcher.match(referenceDescriptors, databaseDescriptors, matches);
-//        // Calculate the proximity score
-//        double proximityScore = 0.0;
-//        for (DMatch match : matches.toList()) {
-//            proximityScore += match.distance;
-//        }
-//        proximityScore /= matches.size().height;
-//        return proximityScore;
+        // Create a descriptor matcher
+        DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
+        // Match the reference descriptors to the database descriptors
+        MatOfDMatch matches = new MatOfDMatch();
+        matcher.match(referenceDescriptors, databaseDescriptors, matches);
+        // Calculate the proximity score
+        double proximityScore = 0.0;
+        for (DMatch match : matches.toList()) {
+            proximityScore += match.distance;
+        }
+        proximityScore /= matches.size().height;
+        return proximityScore;
 
 
         // Trouver les correspondances entre les descripteurs
 
-            MatOfDMatch matches = new MatOfDMatch();
-            DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
-            matcher.match(referenceDescriptors, databaseDescriptors, matches);
-
-            // Calculer le score de correspondance
-            double max_dist = 0; double min_dist = 100;
-            DMatch[] match = matches.toArray();
-            for( int i = 0; i < referenceDescriptors.rows(); i++ )
-            { double dist = match[i].distance;
-                if( dist < min_dist ) min_dist = dist;
-                if( dist > max_dist ) max_dist = dist;
-            }
-            double proximityScore = (1 - (min_dist / max_dist));
-            return proximityScore;
+//            MatOfDMatch matches = new MatOfDMatch();
+//            DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
+//            matcher.match(referenceDescriptors, databaseDescriptors, matches);
+//
+//            // Calculer le score de correspondance
+//            double max_dist = 0; double min_dist = 100;
+//            DMatch[] match = matches.toArray();
+//            for( int i = 0; i < referenceDescriptors.rows(); i++ )
+//            { double dist = match[i].distance;
+//                if( dist < min_dist ) min_dist = dist;
+//                if( dist > max_dist ) max_dist = dist;
+//            }
+//            double proximityScore = (1 - (min_dist / max_dist));
+//            return proximityScore;
 
 //        System.out.println("Score de correspondance: " + (1 - (min_dist / max_dist)));
     }
 
 
 
-    public static ScoreImage getImageBestScore(Mat referenceDescriptors) throws IOException {
-
+    public static List<ScoreImage> getTop3ImageBestScore(Mat referenceDescriptors) throws IOException {
         List<Descriptor> descriptorList = readDescriptor();
-        String rslt ="";
-        double max = 0;
+        List<ScoreImage> top3Results = new ArrayList<>();
 
-        for (Descriptor d :descriptorList )
-        {
-            if (calculateProximityScore( referenceDescriptors, d.getDescriptor())>=max )
-            {
-                max = calculateProximityScore( referenceDescriptors, d.getDescriptor());
-                rslt = d.getImageName();
+        for (Descriptor d : descriptorList) {
+            double score = calculateProximityScore(referenceDescriptors, d.getDescriptor());
+            ScoreImage currentResult = new ScoreImage(d.getImageName(), score);
+
+            // Si la liste top3Results n'est pas pleine
+            if (top3Results.size() < 3) {
+                top3Results.add(currentResult);
+            } else {
+                // Trouver le plus grand score dans top3Results
+                int worstScoreIndex = 0;
+                double worstScore = top3Results.get(0).getScore();
+                for (int i = 1; i < top3Results.size(); i++) {
+                    if (top3Results.get(i).getScore() > worstScore) {
+                        worstScore = top3Results.get(i).getScore();
+                        worstScoreIndex = i;
+                    }
+                }
+                // Remplacer le plus grand score par currentResult si celui-ci est plus petit
+                if (currentResult.getScore() < worstScore) {
+                    top3Results.set(worstScoreIndex, currentResult);
+                }
             }
-
         }
-        return new ScoreImage(rslt,max);
-
+        // Trier top3Results en ordre croissant
+        top3Results.sort(Comparator.comparingDouble(ScoreImage::getScore));
+        return top3Results;
     }
 
 
