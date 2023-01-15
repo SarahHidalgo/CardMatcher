@@ -9,6 +9,7 @@ import tse.fise2.image3.cardmatcher.util.FileUtil;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -225,23 +226,36 @@ public class Sift {
 
 
 
-    public static ScoreImage getImageBestScore(Mat referenceDescriptors) throws IOException {
-
+    public static List<ScoreImage> getTop3ImageBestScore(Mat referenceDescriptors) throws IOException {
         List<Descriptor> descriptorList = readDescriptor();
-        String rslt ="";
-        double min = 10000;
+        List<ScoreImage> top3Results = new ArrayList<>();
 
-        for (Descriptor d :descriptorList )
-        {
-            if (calculateProximityScore( referenceDescriptors, d.getDescriptor())<=min  )
-            {
-                min = calculateProximityScore( referenceDescriptors, d.getDescriptor());
-                rslt = d.getImageName();
+        for (Descriptor d : descriptorList) {
+            double score = calculateProximityScore(referenceDescriptors, d.getDescriptor());
+            ScoreImage currentResult = new ScoreImage(d.getImageName(), score);
+
+            // Si la liste top3Results n'est pas pleine
+            if (top3Results.size() < 3) {
+                top3Results.add(currentResult);
+            } else {
+                // Trouver le plus grand score dans top3Results
+                int worstScoreIndex = 0;
+                double worstScore = top3Results.get(0).getScore();
+                for (int i = 1; i < top3Results.size(); i++) {
+                    if (top3Results.get(i).getScore() > worstScore) {
+                        worstScore = top3Results.get(i).getScore();
+                        worstScoreIndex = i;
+                    }
+                }
+                // Remplacer le plus grand score par currentResult si celui-ci est plus petit
+                if (currentResult.getScore() < worstScore) {
+                    top3Results.set(worstScoreIndex, currentResult);
+                }
             }
-
         }
-        return new ScoreImage(rslt,min);
-
+        // Trier top3Results en ordre croissant
+        top3Results.sort(Comparator.comparingDouble(ScoreImage::getScore));
+        return top3Results;
     }
 
 

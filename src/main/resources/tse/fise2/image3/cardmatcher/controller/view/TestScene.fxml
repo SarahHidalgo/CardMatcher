@@ -76,7 +76,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="detect_frame2" fitHeight="192.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="192.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                </children>
