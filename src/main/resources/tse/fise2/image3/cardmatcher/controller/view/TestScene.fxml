@@ -44,6 +44,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import java.net.URL?>
 <VBox alignment="BASELINE_CENTER" prefHeight="651.0" prefWidth="1140.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.TestSceneController">
     <children>
 
@@ -176,6 +177,11 @@
         </HBox>
 
     </children>
+
+
+    <stylesheets>
+        <URL value="@../../css/styles.css" />
+    </stylesheets>
 
 <!--    <ImageView fx:id="detect_frame" blendMode="SRC_ATOP" fitHeight="133.0" fitWidth="92.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="-95.0" translateY="-50.0" x="10.0" y="10.0" />-->
 </VBox>

@@ -30,4 +30,10 @@
     cursor: pointer;
 
 }
+#detect_frame2{
+    -fx-opacity: 0.7;
+}
 
+#detect_frame3{
+    -fx-opacity: 0.4;
+}
