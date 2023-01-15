@@ -33,6 +33,8 @@ public class App extends Application {
 
             primaryStage.setTitle("CardMatcher");
             primaryStage.setScene(scene);
+            //full screen automatic
+            primaryStage.setMaximized(true);
 //            primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
 //                public void handle(WindowEvent we)
 //                {
