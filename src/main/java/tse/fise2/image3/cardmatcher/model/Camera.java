@@ -47,6 +47,7 @@ public abstract class Camera{
 
     private Card card= new Card("2coeur");
     private Descriptor descCard;
+    public Image best_image;
 
     //
     private Label label = new Label();
@@ -118,8 +119,6 @@ public abstract class Camera{
                     }
                 };
 
-
-                // à revoir aussi pour bien comprendre
                 this.timer = Executors.newSingleThreadScheduledExecutor();
                 this.timer.scheduleAtFixedRate(frameGrabber, 0, 33, TimeUnit.MILLISECONDS);
 
@@ -214,40 +213,34 @@ public abstract class Camera{
 
         }else if(testingmode)
         {
-//            System.out.println("test");
             Thread.sleep(2000);
 
-           //calcul du descripteur de l'image test
-            Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
-            Mat crop_frame = new Mat(getFrame(),rectCrop);
+            //calcul du descripteur de l'image test
+             Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
+             Mat crop_frame = new Mat(getFrame(),rectCrop);
+
+             Descriptor desc = Sift.getDescriptor(crop_frame, "");
+             //nom de la carte ayant le meilleur score de correspondance
+             ScoreImage sm= Sift.getImageBestScore(desc.getDescriptor());
+             desc.setImageName(sm.getImageName());
+             setDescCard(desc);
+             card.setName(sm.getImageName());
 
 
+             MsgUtil.DisplayMsg("this card belongs to class "+card.getName()+" with the proximity score  "+sm.getScore() );
 
+             this.saveImage();
+             InputStream stream = null;
+             try {
 
-            Descriptor desc = Sift.getDescriptor(crop_frame, "");
-            //nom de la carte ayant le meilleur score de correspondance
-            ScoreImage sm= Sift.getImageBestScore(desc.getDescriptor());
-            desc.setImageName(sm.getImageName());
-            setDescCard(desc);
-            card.setName(sm.getImageName());
-
-
-            MsgUtil.DisplayMsg("this card belongs to class "+card.getName()+" with the proximity score  "+sm.getScore() );
-
-            this.saveImage();
-            InputStream stream = null;
-            try {
-
-                String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
-                String folder = userHome + "/apprentissage";
-                stream = new FileInputStream(folder+"/"+sm.getImageName()+".png");
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            Image image = new Image(stream);
-            imagedetection.setImage(image);
-
-
+                 String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
+                 String folder = userHome + "/apprentissage";
+                 stream = new FileInputStream(folder+"/"+sm.getImageName()+".png");
+             } catch (FileNotFoundException e) {
+                 e.printStackTrace();
+             }
+             best_image = new Image(stream);
+             imagedetection.setImage(best_image);
         }
 
     }

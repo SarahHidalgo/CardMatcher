@@ -1,6 +1,7 @@
 package tse.fise2.image3.cardmatcher.model;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +25,23 @@ import tse.fise2.image3.cardmatcher.util.FileUtil;
 
 public class Base {
 
+	private String path;
+	public boolean correspondance=false;
+	
+	private Camera capture1 = new CameraTest();
+	
+	public boolean isCorrespondance() {
+		return correspondance;
+	}
 
+	public void setCorrespondance(boolean correspondance) {
+		this.correspondance = correspondance;
+	}
+
+	public String getPath() {
+		return path;
+	}
+	
     public void displayImage(String path, ImageView img) {
         File file = new File(path);
         String localUrl;
@@ -81,7 +98,7 @@ public class Base {
         }
     }
 
-    public void initializeList(URL arg0, ResourceBundle arg1, ListView<String> mylistview, Label label_base,ImageView image_base,String baseName) {
+    public void initializeList(URL arg0, ResourceBundle arg1, ListView<String> mylistview,Label label_title, Label label_small_card,Label label_current_card, ImageView image_base, ImageView small_img_card,String baseName) {
         FileUtil.CreateFolder(baseName);
         ObservableList<String> listeArray = displayBase(baseName);
         mylistview.getItems().addAll(listeArray);
@@ -89,13 +106,46 @@ public class Base {
         mylistview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-                String path = System.getProperty("user.dir")+ "/"+baseName+"/"+ mylistview.getSelectionModel().getSelectedItem();
-                //System.out.println(path);
+                path = System.getProperty("user.dir")+ "/"+baseName+"/"+ mylistview.getSelectionModel().getSelectedItem();
+                correspondance=false;
                 displayImage(path, image_base);
-                label_base.setText(mylistview.getSelectionModel().getSelectedItem());
-            }
+                label_current_card.setText(mylistview.getSelectionModel().getSelectedItem());
+				if (label_title!=null) {
+					label_title.setText("Carte Selectionnée");
+					displayCorres(label_title,label_small_card,label_current_card,image_base,small_img_card);			
+					}
+				}            
         });
     };
+    
+	public void displayCorres(Label label_title, Label label_small_card,Label label_current_card, ImageView image_base, ImageView small_img_card) {
+    	if (correspondance) {
+        	displayImage(getPath(),small_img_card);
+        	label_title.setText("Carte Correspondante");
+        	
+        	// ici faut display image qui correspond le mieux 
+        	label_current_card.setText("nom carte correspondante");
+    	}
+    	else {
+    		small_img_card.setImage(null);
+    		label_title.setText("Carte Selectionnée");
+    	}
+	}
+	
+	public void displayPtsInteretsCard(Label label_current_card, Label label_small_card, ImageView small_img_card, ImageView image_base) {
+		if (this.isCorrespondance()) {
+			// Xavier // mettre image avec les deux cartes comparées et leurs pts d'inétrets jsp quoi
+			small_img_card.setImage(null);
+			displayImage("C:/Users/sarah/git/projet_informatique/apprentissage/3coeur.png",image_base);
+		}
+		else {
+	    	// Idisplay juste pts intérets carte selectionnée
+	    	displayImage("C:/Users/sarah/git/projet_informatique/apprentissage/1.jpg", image_base);
+	    	label_current_card.setText("carte avec pts interets");
+		}
+	}
+    
+    
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void searchFieldProperty(TextField search_field, ListView<String> mylistview,String baseName) {
         search_field.textProperty().addListener(new ChangeListener() {

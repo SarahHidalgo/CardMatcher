@@ -61,6 +61,8 @@ public class LearningSceneController implements Initializable {
     @FXML
     private MenuItem btn_nav_test;
     @FXML
+    private MenuItem btn_nav_learn;
+    @FXML
     private ImageView learningFrame;
     @FXML
     private ImageView menuFrame;
@@ -114,6 +116,23 @@ public class LearningSceneController implements Initializable {
         Stage stage = (Stage)((MenuItem) btn_nav_test).getParentPopup().getOwnerWindow();
         stage.getScene().setRoot(backLoader);
     }
+    @FXML
+    public void goLearn(ActionEvent actionEvent)  throws IOException{
+        capture1.setCameraActive(false);
+        // stop the timer
+        capture1.stopAcquisition();
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/LearningScene.fxml"));
+		Stage stage = (Stage)((MenuItem) btn_nav_learn).getParentPopup().getOwnerWindow();
+        stage.getScene().setRoot(backLoader);
+    }
+    @FXML
+    public void goLearnBase(ActionEvent actionEvent) throws IOException{
+        capture1.stopAcquisition();
+        Parent backLoader = FXMLLoader.load(getClass().getResource("view/LearningBase.fxml"));
+        Stage stage = (Stage)((MenuItem) btn_learningbase).getParentPopup().getOwnerWindow();
+        stage.getScene().setRoot(backLoader);
+    }
+    
     public void importdatabase(ActionEvent actionEvent){
         try {
 
@@ -157,6 +176,7 @@ public class LearningSceneController implements Initializable {
             MsgUtil.DisplayMsg("Import failed !");
         }
     }
+    
     public void about(ActionEvent actionEvent) {       
     	Stage stage = new Stage();
     	
@@ -229,15 +249,6 @@ public class LearningSceneController implements Initializable {
      }
 
 
-
-    @FXML
-    public void goLearnBase(ActionEvent actionEvent) throws IOException{
-        capture1.stopAcquisition();
-        Parent backLoader = FXMLLoader.load(getClass().getResource("view/LearningBase.fxml"));
-        Stage stage = (Stage)((MenuItem) btn_learningbase).getParentPopup().getOwnerWindow();
-        stage.getScene().setRoot(backLoader);
-    }
-
     /*Fonction servant à l'actualisation de l'affichage de l'image enregistrée précédente
      * ainsi que l'affichage de la liste de la base d'apprentissage
      *
@@ -253,25 +264,16 @@ public class LearningSceneController implements Initializable {
                     String card_name= capture1.getCard().getName();
                     name_saved_card.setText(card_name);
                     //System.out.println("Nom de la carte enregistrée: " + card_name);
-                    String path = System.getProperty("user.dir")+ "/apprentissage/"+ card_name + ".jpg";
+                    String path = System.getProperty("user.dir")+ "/apprentissage/"+ card_name + ".png";
                     //System.out.println("chemin : " + path);
                     base.displayImage(path, img_saved);
                 }
             });
         }
-        base.initializeList(arg0, arg1, mylistview, label_base_learning, image_base,"apprentissage");
+        base.initializeList(arg0, arg1, mylistview,null,null, label_base_learning, image_base,null,"apprentissage");
         //add Listener to filterInput TextField
         if (search_field!=null) {
             base.searchFieldProperty(search_field, mylistview,"apprentissage");
         }
-    }
-
-    public void golearn(ActionEvent actionEvent) throws IOException {
-        capture1.setCameraActive(false);
-        // stop the timer
-        capture1.stopAcquisition();
-        Parent backLoader = FXMLLoader.load(getClass().getResource("view/LearningScene.fxml"));
-        Stage stage = (Stage)((MenuItem) btn_nav_test).getParentPopup().getOwnerWindow();
-        stage.getScene().setRoot(backLoader);
     }
 }
