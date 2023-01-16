@@ -194,7 +194,7 @@ public class TestSceneController implements Initializable {
     }
 	public void displayCorrespondance(ActionEvent actionEvent) {
 		base.setCorrespondance(true);
-		base.displayCorres(label_carte, label_small_card, label_base_test, image_base, small_img_card);
+		base.displayCorres(label_carte, label_small_card, label_base_test, image_base, small_img_card,mylistview);
 
     }
 	public void displayPtsInterets(ActionEvent actionEvent) {
