@@ -17,14 +17,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+/**
+ * This class allows to display a launching picture before to go to the menu
+ *
+ */
+
 public class StartController {
     @FXML
     ImageView logo;
 
-    public void goMenu(MouseEvent mouseEvent) throws IOException, InterruptedException, UnsupportedAudioFileException, LineUnavailableException {
+    /**
+     * This method allows to launch the menu right after moving the mouse.
+     * @param mouseEvent when the user move his mouse.
+     * @throws IOException if the FXML file is not found.
+     * @throws InterruptedException is something disturb the thread.
+     */
+    
+    public void goMenu(MouseEvent mouseEvent) throws IOException, InterruptedException {
 
-       //play audio when the app start
-//       Audio.play_sound(this.getClass().getResource("media/card_sound.wav"));
         Thread.sleep(1000);
         URL fxmlLocation = getClass().getResource("view/Menu.fxml");
 
@@ -32,7 +42,4 @@ public class StartController {
         logo.getScene().setRoot(menuLoader);
 
     }
-
-
-
 }

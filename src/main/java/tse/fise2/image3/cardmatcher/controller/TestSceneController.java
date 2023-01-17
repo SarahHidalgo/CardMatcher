@@ -27,6 +27,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class is used to control the test mode in which we try to recognize the card in front of the webcam.
+ * Each button or functionality of this mode is directly controlled by this class.
+ *
+ */
+
 public class TestSceneController implements Initializable {
 
     @FXML
@@ -65,7 +71,14 @@ public class TestSceneController implements Initializable {
     public ImageView detect_frame3;
     public Camera capture1 = new CameraTest();
     public Base base= new Base();
-    // Event Listener on Button[#start_btn].onAction
+
+    /**
+     * This method allows to open then Webcam for the test mode, clicking on the Start camera button.
+     * @param event when there is an event called startCamera threw by the fxml file.
+     * @throws InterruptedException
+     * @throws IOException
+     */
+    
     @FXML
     public void startCamera(ActionEvent event) throws InterruptedException, IOException {
         boolean testingmode = true;
@@ -77,7 +90,14 @@ public class TestSceneController implements Initializable {
 
     }
 
-    public void back(ActionEvent actionEvent)  throws IOException {
+    /**
+     * This method allows to go back to the menu when we are in test mode, clicking on the left arrow button.
+     * @param actionEvent when there is an event called back threw by the fxml file.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    
+    public void back(ActionEvent actionEvent)  throws IOException, InterruptedException {
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
@@ -85,8 +105,15 @@ public class TestSceneController implements Initializable {
         Stage stage = (Stage)((MenuItem) btn_nav_menu).getParentPopup().getOwnerWindow();
         stage.getScene().setRoot(backLoader);
     }
+    
+    /**
+     * This method allows to go to the learning mode when we are in test mode, clicking on option Learning in Navigate.
+     * @param actionEvent when there is an event called goLearn threw by the fxml file.
+     * @throws IOException
+     * @throws InterruptedException
+     */
 
-    public void goLearn(ActionEvent actionEvent) throws IOException {
+    public void goLearn(ActionEvent actionEvent) throws IOException, InterruptedException {
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
@@ -95,14 +122,28 @@ public class TestSceneController implements Initializable {
         stage.getScene().setRoot(backLoader);
     }
 
-    public void goTestBase(ActionEvent actionEvent) throws IOException{
+    /**
+     * This method allows to go to the test base when we are in learning mode, clicking on the option Base.
+     * @param actionEvent when there is an event called goTestBase threw by the fxml file.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    
+    public void goTestBase(ActionEvent actionEvent) throws IOException, InterruptedException{
         capture1.stopAcquisition();
         Parent backLoader = FXMLLoader.load(getClass().getResource("view/TestBase.fxml"));
         Stage stage = (Stage)((MenuItem) btn_testbase).getParentPopup().getOwnerWindow();
         stage.getScene().setRoot(backLoader);
     }
     
-    public void goTest(ActionEvent actionEvent) throws IOException {
+    /**
+     * This method allows to go to the test mode. Seems useless.
+     * @param actionEvent when there is an event called goTest threw by the fxml file.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    
+    public void goTest(ActionEvent actionEvent) throws IOException, InterruptedException {
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
@@ -111,6 +152,12 @@ public class TestSceneController implements Initializable {
         stage.getScene().setRoot(backLoader);
     }
 
+    /**
+     * This method allows to display the informations when we are in test mode, clicking on option About in Help.
+     * It opens a window which contains useful informations to use and understand the test mode.
+     * @param actionEvent when there is an event called about threw by the FXML file.
+     */
+    
     public void about(ActionEvent actionEvent) {       
     	Stage stage = new Stage();
     	
@@ -170,20 +217,13 @@ public class TestSceneController implements Initializable {
         root.getChildren().add(grabText);
         root.getChildren().add(title3);
         root.getChildren().add(matchText);
-        //Creating a scene object
+
         Scene scene = new Scene(root, 600, 420);  
-        
-        //Setting title to the Stage 
         stage.setTitle("About Learning Mode"); 
-           
-        //Adding scene to the stage 
-        stage.setScene(scene); 
-           
-        //Displaying the contents of the stage 
+        stage.setScene(scene);
         stage.show(); 
      }
-
-
+    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         base.initializeList(arg0, arg1, mylistview, label_carte, label_small_card, label_base_test, image_base, small_img_card,"test");

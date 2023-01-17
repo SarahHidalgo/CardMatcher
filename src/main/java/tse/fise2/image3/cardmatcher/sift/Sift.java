@@ -13,250 +13,231 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class implements the four main steps involved in SIFT algorithm to make descriptors and recognition
+ * managing. It mainly uses the OpenCV library.
+ *
+ */
+
 public class Sift {
 
-    /**
-     * @param image
-     * @param name
-     * @return Ce code utilise l'algorithme ORB pour détecter les points clés et calculer les descripteurs .
-     */
-    public  static Descriptor getDescriptor(Mat image, String name)
-    {
+	/**
+	 * This method allows to extract and compute the SIFT descriptors of an input image.
+	 * It uses the OpenCV features2D package to process the image and get its descriptors.
+	 * 
+	 * @param image the image we want to extract the descriptors of.
+	 * @param name the name of the image
+	 * @return Descriptor the descriptors of the image .
+	 */
 
-        if (image.empty()) {
-            System.out.println("Erreur lors du chargement de l'image");
-            return null;
-        }
-//        Mat image = new Mat();
-//-------------------enlever ce commentaire si vous etes en version 4.0.0.0
-        // Create a SIFT feature detector and descriptor extractor
-//        FeatureDetector detector = FeatureDetector.create(FeatureDetector.SIFT);
-//        DescriptorExtractor extractor = DescriptorExtractor.create(DescriptorExtractor.SIFT);;
-//-----------------------------------------------------------------------------------------------
+	public  static Descriptor getDescriptor(Mat image, String name)
+	{
 
+		if (image.empty()) {
+			System.out.println("Erreur lors du chargement de l'image");
+			return null;
+		}
+		SIFT detector = SIFT.create();
+		SIFT extractor = SIFT.create();
+		MatOfKeyPoint keypoints = new MatOfKeyPoint();
 
-//        et commentez les 2 lignes suivantes
-        SIFT detector = SIFT.create();
-        SIFT extractor = SIFT.create();
-//------------------------------------------------------------------------------------------------
+		// Detect the keypoints of the image
+		detector.detect(image, keypoints);
+		Mat descriptors = new Mat();
+		extractor.compute(image, keypoints, descriptors);
+		Descriptor des = new Descriptor(name,descriptors);
 
+		return des;
+	}
 
-//        Détectez les points clés et calculez les descripteurs:
-        MatOfKeyPoint keypoints = new MatOfKeyPoint();
-        detector.detect(image, keypoints);
-        Mat descriptors = new Mat();
-        extractor.compute(image, keypoints, descriptors);
-        System.out.println(descriptors.size().toString());
-        Descriptor des = new Descriptor(name,descriptors);
+	/**
+	 * Saves SIFT descriptor into a CSV file
+	 * 
+	 * @param desc the descriptor to be saved
+	 * @throws IOException if the file cannot be written
+	 */
 
+	public static void saveDescriptor(Descriptor desc) throws IOException {
 
-        return des;
-    }
+		FileUtil.CreateFile("descriptorsDB","csv");
+		BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"/descriptorsDB.csv",true));
 
-    public static void saveDescriptor(Descriptor desc) throws IOException {
+		writer.append(desc.getImageName());
+		writer.append(",");
 
-        System.out.println(desc);
-        //     Enregistrez les descripteurs dans un fichier:
-        FileUtil.CreateFile("descriptorsDB","csv");
-        BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"/descriptorsDB.csv",true));
+		for (int i = 0; i < desc.getDescriptor().rows(); i++) {
+			StringBuilder sb = new StringBuilder();
+			for (int j = 0; j <desc.getDescriptor().cols(); j++) {
+				sb.append(desc.getDescriptor().get(i, j)[0]).append(",");
+			}
 
-        // écrivez le nom
-        writer.append(desc.getImageName());
-        writer.append(",");
+			// Delete the last comma
+			sb.setLength(sb.length() - 1);
+			writer.append(sb.toString());
+			writer.newLine();
+		}
+		writer.close();
+	}
 
-        for (int i = 0; i < desc.getDescriptor().rows(); i++) {
-            StringBuilder sb = new StringBuilder();
-            for (int j = 0; j <desc.getDescriptor().cols(); j++) {
-                sb.append(desc.getDescriptor().get(i, j)[0]).append(",");
-            }
-            sb.setLength(sb.length() - 1); // supprime la dernière virgule
-            writer.append(sb.toString());
-            writer.newLine();
-        }
+	/**
+	 * Reads SIFT descriptor from a CSV file
+	 * The file is read line by line and its values are added to a list.
+	 * 
+	 * @return a list of descriptors
+	 * @throws IOException if the file cannot be read
+	 */
 
-        writer.close();
+	public static List<Descriptor> readDescriptor() throws IOException {
 
-
-
-
-    }
-
-    public static List<Descriptor> readDescriptor() throws IOException {
-
-        List<Descriptor> descriptorList = new ArrayList<>();
-
-
-        int i=0;
-        //k sert a preciser si la ligne contient le nom de l'image
-        int k=0;
-
-        boolean t=false;
-        // Ouvrez le fichier en utilisant BufferedReader
-        FileUtil.CreateFile("descriptorsDB","csv");
-        BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/descriptorsDB.csv"));
-
-        Descriptor des =new Descriptor();
-        descriptorList.add(des);
-
-        // Lisez chaque ligne du fichier
-        String line;
-        // Créez une liste pour stocker les données
-        List<float[]> data = new ArrayList<>();
-
-        while ((line = reader.readLine()) != null) {
-
-             k=0;
-            // Séparez la ligne en différentes valeurs numériques
-            String[] values = line.split(",");
+		List<Descriptor> descriptorList = new ArrayList<>();
 
 
-            if ( t && !values[0].matches("-?\\d+(\\.\\d+)?")  ) {
-                // Créez une matrice à partir de la liste de données
-                Mat mat = new Mat(data.size(), data.get(0).length, CvType.CV_32F);
-                for (int j = 0; j < data.size(); j++) {
-                    mat.put(j, 0, data.get(j));
-                }
-                des.setDescriptor(mat);
-                descriptorList.add(des);
+		int i=0;
 
-                i++;
-                des = new Descriptor();
-                //reinisialiser data pour le nouveau descripteur
-                data = new ArrayList<>();
+		//k is here to know if the line contains image's name
+		int k=0;
 
-            }
+		boolean t=false;
+		FileUtil.CreateFile("descriptorsDB","csv");
+		BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/descriptorsDB.csv"));
 
+		Descriptor des =new Descriptor();
+		descriptorList.add(des);
 
+		String line;
+		List<float[]> data = new ArrayList<>();
 
+		while ((line = reader.readLine()) != null) {
 
-
-            if(!values[0].matches("-?\\d+(\\.\\d+)?"))
-            {
-                des.setImageName(values[0]);
-                k=1;
-                t=true;
+			k=0;
+			// Separate the line in different numerical values
+			String[] values = line.split(",");
 
 
-            }
+			if ( t && !values[0].matches("-?\\d+(\\.\\d+)?")  ) {
+				Mat mat = new Mat(data.size(), data.get(0).length, CvType.CV_32F);
+				for (int j = 0; j < data.size(); j++) {
+					mat.put(j, 0, data.get(j));
+				}
+				des.setDescriptor(mat);
+				descriptorList.add(des);
+
+				i++;
+				des = new Descriptor();
+
+				//Reinit data for the new descriptor
+				data = new ArrayList<>();
+			}
+
+			if(!values[0].matches("-?\\d+(\\.\\d+)?"))
+			{
+				des.setImageName(values[0]);
+				k=1;
+				t=true;
+			}
+
+			// Convert every value into a float and add it to the list
+			int n;
+			if (k==1)
+			{
+				n= values.length-1;
+
+			}else {
+				n = values.length;
+			}
+
+			float[] rowData = new float[n];
+			for (int j = 0; j < n; j++) {
+
+				if(k==1) {
+					rowData[j] = Float.parseFloat(values[j+1]);
+				}else
+					rowData[j] = Float.parseFloat(values[j]);
+			}
+			data.add(rowData);
+		}
 
 
-
-            // Convertissez chaque valeur en un nombre flottant et ajoutez-le à la liste
-            int n;
-            if (k==1)
-            {
-                n= values.length-1;
-
-            }else {
-                 n = values.length;
-            }
-
-            float[] rowData = new float[n];
-            for (int j = 0; j < n; j++) {
-
-                if(k==1) {
-                    rowData[j] = Float.parseFloat(values[j+1]);
-                }else
-                    rowData[j] = Float.parseFloat(values[j]);
-            }
-            data.add(rowData);
+		// Adding the last descriptor
+		if(i>0) {
+			Mat mat = new Mat(data.size(), data.get(0).length, CvType.CV_32F);
+			for (int j = 0; j < data.size(); j++) {
+				mat.put(j, 0, data.get(j));
+			}
+			des.setDescriptor(mat);
+			descriptorList.add(des);
+		}
+		reader.close();
+		return descriptorList;
+	}
 
 
-        }
+	/**
 
-
-        // pour ajouter le dernier descripteur
-        if(i>0) {
-            Mat mat = new Mat(data.size(), data.get(0).length, CvType.CV_32F);
-            for (int j = 0; j < data.size(); j++) {
-                mat.put(j, 0, data.get(j));
-            }
-            des.setDescriptor(mat);
-            descriptorList.add(des);
-        }
-
-
-        // Fermez le reader
-        reader.close();
-       return descriptorList;
-
-    }
-
-
-    /**
-     * @param referenceDescriptors
-     * @param databaseDescriptors
-     * @return  Il utilise l'algorithme de recherche de correspondance de flot de Foster (BRUTEFORCE_HAMMING) pour trouver le score de c orrespondance
-     */
+	* This method allows to calculate the proximity score between reference descriptors and database descriptors using L1 distance
+	*
+	* @param referenceDescriptors the reference descriptors to compare
+	* @param databaseDescriptors the database descriptors to compare
+	* @return proximityScore the proximity score between the descriptors of the two images.
+	*/
+	
 	public static double calculateProximityScore(Mat referenceDescriptors, Mat databaseDescriptors) {
 
-        // Create a descriptor matcher
-        DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
-        // Match the reference descriptors to the database descriptors
-        MatOfDMatch matches = new MatOfDMatch();
-        matcher.match(referenceDescriptors, databaseDescriptors, matches);
-        // Calculate the proximity score
-        double proximityScore = 0.0;
-        for (DMatch match : matches.toList()) {
-            proximityScore += match.distance;
-        }
-        proximityScore /= matches.size().height;
-        return proximityScore;
+		// Create a descriptor matcher
+		DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
+		// Match the reference descriptors to the database descriptors
+		MatOfDMatch matches = new MatOfDMatch();
+		matcher.match(referenceDescriptors, databaseDescriptors, matches);
+		// Calculate the proximity score
+		double proximityScore = 0.0;
+		for (DMatch match : matches.toList()) {
+			proximityScore += match.distance;
+		}
+		proximityScore /= matches.size().height;
+		return proximityScore;
+	}
 
 
-        // Trouver les correspondances entre les descripteurs
+	/**
 
-//            MatOfDMatch matches = new MatOfDMatch();
-//            DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_L1);
-//            matcher.match(referenceDescriptors, databaseDescriptors, matches);
-//
-//            // Calculer le score de correspondance
-//            double max_dist = 0; double min_dist = 100;
-//            DMatch[] match = matches.toArray();
-//            for( int i = 0; i < referenceDescriptors.rows(); i++ )
-//            { double dist = match[i].distance;
-//                if( dist < min_dist ) min_dist = dist;
-//                if( dist > max_dist ) max_dist = dist;
-//            }
-//            double proximityScore = (1 - (min_dist / max_dist));
-//            return proximityScore;
+	* Read the descriptor from the csv file and return the closest 3 descriptors to the
+	* descriptors of the tested image.
+	* 
+	* @param referenceDescriptors the descriptors of the tested image.
+	* @return the list of descriptor objects
+	* @throws IOException if the file is not found
+	*/
+	
+	public static List<ScoreImage> getTop3ImageBestScore(Mat referenceDescriptors) throws IOException {
+		
+		List<Descriptor> descriptorList = readDescriptor();
+		List<ScoreImage> top3Results = new ArrayList<>();
 
-//        System.out.println("Score de correspondance: " + (1 - (min_dist / max_dist)));
-    }
+		for (Descriptor d : descriptorList) {
+			double score = calculateProximityScore(referenceDescriptors, d.getDescriptor());
+			ScoreImage currentResult = new ScoreImage(d.getImageName(), score);
 
-
-
-    public static List<ScoreImage> getTop3ImageBestScore(Mat referenceDescriptors) throws IOException {
-        List<Descriptor> descriptorList = readDescriptor();
-        List<ScoreImage> top3Results = new ArrayList<>();
-
-        for (Descriptor d : descriptorList) {
-            double score = calculateProximityScore(referenceDescriptors, d.getDescriptor());
-            ScoreImage currentResult = new ScoreImage(d.getImageName(), score);
-
-            // Si la liste top3Results n'est pas pleine
-            if (top3Results.size() < 3) {
-                top3Results.add(currentResult);
-            } else {
-                // Trouver le plus grand score dans top3Results
-                int worstScoreIndex = 0;
-                double worstScore = top3Results.get(0).getScore();
-                for (int i = 1; i < top3Results.size(); i++) {
-                    if (top3Results.get(i).getScore() > worstScore) {
-                        worstScore = top3Results.get(i).getScore();
-                        worstScoreIndex = i;
-                    }
-                }
-                // Remplacer le plus grand score par currentResult si celui-ci est plus petit
-                if (currentResult.getScore() < worstScore) {
-                    top3Results.set(worstScoreIndex, currentResult);
-                }
-            }
-        }
-        // Trier top3Results en ordre croissant
-        top3Results.sort(Comparator.comparingDouble(ScoreImage::getScore));
-        return top3Results;
-    }
-
-
+			// If the list top3Results is not full
+			if (top3Results.size() < 3) {
+				top3Results.add(currentResult);
+			} else {
+				// Find the bigger score in top3Results
+				int worstScoreIndex = 0;
+				double worstScore = top3Results.get(0).getScore();
+				for (int i = 1; i < top3Results.size(); i++) {
+					if (top3Results.get(i).getScore() > worstScore) {
+						worstScore = top3Results.get(i).getScore();
+						worstScoreIndex = i;
+					}
+				}
+				// Replace the bigger score by currentResult if this one is too small.
+				if (currentResult.getScore() < worstScore) {
+					top3Results.set(worstScoreIndex, currentResult);
+				}
+			}
+		}
+		// Sort top3Results in ascending order.
+		top3Results.sort(Comparator.comparingDouble(ScoreImage::getScore));
+		return top3Results;
+	}
 }

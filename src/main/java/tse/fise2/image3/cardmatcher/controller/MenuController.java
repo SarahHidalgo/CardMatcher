@@ -21,12 +21,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This class is used to control the menu.
+ * Each button of this menu is directly controlled by this class.
+ *
+ */
+
 public class MenuController {
     @FXML
     private Button btn_test;
     @FXML
     private Button btn_app;
 
+    /**
+     * This method allows to go to learning mode, clicking on Learning button.
+     * @param event when there is an event called onClickedApp threw by the fxml file.
+     * @throws IOException
+     */
+    
     @FXML
     public void onClickedApp(ActionEvent event) throws IOException {
 
@@ -38,6 +50,12 @@ public class MenuController {
 
     }
 
+    /**
+     * This method allows to go to test mode, clicking on Test button.
+     * @param event when there is an event called onClickedtest threw by the fxml file.
+     * @throws IOException
+     */
+    
     public void onClickedtest (ActionEvent actionEvent)throws IOException {
 
 
@@ -45,6 +63,11 @@ public class MenuController {
 
         btn_test.getScene().setRoot(modeTest);
     }
+    
+    /**
+     * This method allows to display general informations about the app, clicking on Help button.
+     * @param event when there is an event called about threw by the fxml file.
+     */
     
     public void about(ActionEvent actionEvent) {       
     	Stage stage = new Stage();

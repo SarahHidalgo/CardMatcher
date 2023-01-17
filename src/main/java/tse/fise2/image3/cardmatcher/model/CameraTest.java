@@ -11,14 +11,29 @@ import tse.fise2.image3.cardmatcher.sift.Sift;
 import tse.fise2.image3.cardmatcher.util.FileUtil;
 
 import java.io.File;
+import java.io.IOException;
+
+/**
+ * This class is used to grab a picture in test mode in order to recognize thanks to the database.
+ * It is inherited from the class Camera.
+ * 
+ */
 
 public class CameraTest  extends Camera {
-    @Override
+    
+	/**
+	 * This class is used to grab a picture in test mode in order to recognize it.
+	 * It grabs the picture in front of the webcam, saves the image and its SIFT descriptors, 
+	 * and then match it with the descriptors of the pictures in the database.
+	 * 
+	 * @throws IOException 
+	 */
+	
+	@Override
     public void saveImage() {
 
 
         String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
-        //enregistrer dans le projet
         String folder = userHome + "/test";
         FileUtil.CreateFolder(folder);
         String pictureName = super.getLabel().getText();
@@ -29,9 +44,12 @@ public class CameraTest  extends Camera {
         }
         file += "Test" + i + ".png";
         String SE = System.getProperty("os.name").toLowerCase();
+        
+        // Different crop boundaries for Mac or windows users.
         if (SE.indexOf("win") >= 0) {
         	Rect rectCrop = new Rect(new Point(202, 82), new Point(438, 398));
         	Mat crop_frame = new Mat(super.getFrame(),rectCrop);
+        	// Saves the image into the database
         	Imgcodecs.imwrite(file, crop_frame);
         }
         else {
@@ -39,20 +57,5 @@ public class CameraTest  extends Camera {
         	Mat crop_frame = new Mat(super.getFrame(),rectCrop);
         	Imgcodecs.imwrite(file, crop_frame);
         }
-        
-
-
-//        Descriptor desc = Sift.getDescriptor(crop_frame,super.getCard().getName());
-//        super.setDescCard(desc);
-
-
-        // Saving the image in the folder
-        
-
-
     }
-
-
-
-
 }

@@ -5,8 +5,19 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgproc.Imgproc;
 
+/**
+*
+* The ImageUtil class contains a utility method to detect a card in an image.
+*/
 
 public class ImageUtil {
+	
+	/**
+	* Detects if there is a card in an image.
+	*
+	* @param frame the image to be processed
+	* @return returns true if the image contains a card and false otherwise
+	*/
     public static Boolean detectCard(Mat frame) {
         Mat bin= new Mat();
         Mat mGray= new Mat();
@@ -16,20 +27,15 @@ public class ImageUtil {
         int m=bin.cols();
         int nb= 0;
         int  N= m*n;
-//        HighGui.imshow("Image", bin);
-//        HighGui.waitKey();
         for (int i =0; i<n;i++)
             for (int j =0; j<m;j++) {
-               //detection des pixels blanc avec une marge d'erreur de 10
+            	
+                //White pixels detection with a margin of error of 10
                 if ( bin.get(i, j)[0]== 255)
                    nb++;
             }
-//        System.out.println(Double.valueOf(nb)/(Double.valueOf(N))*100);
-        if (Double.valueOf(nb)/(Double.valueOf(N))*100 > 90)
+        	if (Double.valueOf(nb)/(Double.valueOf(N))*100 > 90)
             return true;
             else return false;
-
-
-
     }
 }
