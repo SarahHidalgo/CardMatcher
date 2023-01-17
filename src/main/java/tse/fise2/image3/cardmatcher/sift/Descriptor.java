@@ -2,13 +2,18 @@ package tse.fise2.image3.cardmatcher.sift;
 
 import org.opencv.core.Mat;
 
+/**
+ * Class representing a descriptor of an image.
+ */
+
 public class Descriptor {
     String imageName;
     Mat descriptor;
 
-
     public Descriptor()
     {}
+    
+    
     public String getImageName() {
         return imageName;
     }

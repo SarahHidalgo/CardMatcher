@@ -9,9 +9,19 @@ import java.util.List;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
+/**
+ * Class for extracting and saving into a database the SIFT descriptors of a set of images.
+ */
+
 public class DatabaseDescriptors {
+	
+	 /**
+     * Extracts and saves the SIFT descriptors of all images in a given input folder.
+     * @param inputFolder the path of the input folder containing the images
+     * @throws IOException if an error occurs while saving the descriptors
+     */
+	
 	public static void extractAndSaveDescriptors(String inputFolder) throws IOException {
-        // Read the input images
         File folder = new File(inputFolder);
         File[] files = folder.listFiles();
 

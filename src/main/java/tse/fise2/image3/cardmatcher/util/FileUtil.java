@@ -8,62 +8,71 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * The FileUtil class contains methods that provide utility functions for working with files and directories.
+ *
+ **/
+
 public class FileUtil {
 
-    public static void CreateFolder(String x) {
-        File dossier = new File(x);
-        boolean res = dossier.mkdir();
-        if (res) {
-            System.out.println("Le dossier a été créé.");
-        } else {
-            System.out.println("Le dossier existe déja.");
-        }
-    }
+	/**
+	 * Creates a folder with the given name
+	 *
+	 * @param x the name of the folder to be created
+	 */
+	public static void CreateFolder(String x) {
+		File dossier = new File(x);
+		boolean res = dossier.mkdir();
+		if (res) {
+			System.out.println("The folder has been created.");
+		} else {
+			System.out.println("The folder already exists.");
+		}
+	}
 
-    public static void CreateFile(String x,String ext) {
-        File file = new File(x+"."+ext);
+	/**
+	 * Creates a file with the given name and extension
+	 *
+	 * @param x the name of the file to be created
+	 * @param ext the extension of the file to be created
+	 */
+	public static void CreateFile(String x, String ext) {
+		File file = new File(x + "." + ext);
 
-        try {
-            if (file.createNewFile()) {
-                System.out.println("Le fichier "+x+"."+ext+" a été créé");
-            } else {
-                System.out.println("Le fichier"+ x +"."+ext+" existe déjà");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			if (file.createNewFile()) {
+				System.out.println("The file " + x + "." + ext + " has been created");
+			} else {
+				System.out.println("The file " + x + "." + ext + " already exists");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     *
-     * @param path
-     * @throws IOException
-     * this method aims to copy all the content of a certain directory in the learning database
-     */
-    public static void copyfolder(String path) throws IOException {
+	/**
+	 * Copies all the content of a certain directory to the learning database
+	 *
+	 * @param path the path of the directory to be copied
+	 * @throws IOException
+	 */
+	public static void copyfolder(String path) throws IOException {
+		String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
+		String folder = userHome + "/apprentissage";
 
-            String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
-            String folder = userHome + "/apprentissage";
+		FileUtils.copyDirectory(new File(path), new File(folder), true);
+	}
 
-            Path sourceDirectory = Paths.get(path);
-            Path targetDirectory = Paths.get(folder);
+	/**
+	 * Copies a file to the learning database
+	 *
+	 * @param path the path of the file to be copied
+	 * @throws IOException
+	 */
+	public static void copyfile(String path) throws IOException {
+		String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
+		String folder = userHome + "/apprentissage";
 
-            FileUtils.copyDirectory(new File(path), new File(folder), true);
-
-
-    }
-
-    public static void copyfile(String path) throws IOException {
-        String userHome = System.getProperty("user.dir"); // return c:\Users\${current_user_name}
-        String folder = userHome + "/apprentissage";
-
-        Path targetDir = Paths.get(folder);
-        FileUtils.copyFileToDirectory(new File(path), new File(folder));
-    }
-
-
-
-    }
-
-
-
+		FileUtils.copyFileToDirectory(new File(path), new File(folder));
+	}
+}

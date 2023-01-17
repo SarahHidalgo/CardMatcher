@@ -51,6 +51,12 @@ import tse.fise2.image3.cardmatcher.sift.DatabaseDescriptors;
 import tse.fise2.image3.cardmatcher.sift.Sift;
 
 
+/**
+ * This class is used to control the learning mode.
+ * Each button or functionality of this mode is directly controlled by this class.
+ *
+ */
+
 public class LearningSceneController implements Initializable {
     @FXML
     private Button start_btn;
@@ -88,7 +94,13 @@ public class LearningSceneController implements Initializable {
     public Camera capture1 = new CameraLearning();
     public Base base= new Base();
 
-    // Event Listener on Button[#start_btn].onAction
+    /**
+     * This method allows to open then Webcam for the learning mode, clicking on the Start camera button.
+     * @param event when there is an event called startCamera threw by the fxml file.
+     * @throws InterruptedException
+     * @throws IOException
+     */
+    
     @FXML
     public void startCamera(ActionEvent event) throws InterruptedException, IOException {
         boolean learningmode = true;
@@ -97,7 +109,13 @@ public class LearningSceneController implements Initializable {
     }
 
 
-    public void back(ActionEvent actionEvent)  throws IOException{
+    /**
+     * This method allows to go back to the menu when we are in learning mode, clicking on the left arrow button.
+     * @param actionEvent when there is an event called back threw by the fxml file.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public void back(ActionEvent actionEvent)  throws IOException, InterruptedException{
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
@@ -108,7 +126,14 @@ public class LearningSceneController implements Initializable {
 
     }
 
-    public void gotest(ActionEvent actionEvent)  throws IOException{
+    /**
+     * This method allows to go to the test mode when we are in learning mode, clicking on option Test in Navigate.
+     * @param actionEvent when there is an event called gotest threw by the fxml file.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    
+    public void gotest(ActionEvent actionEvent)  throws IOException, InterruptedException{
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
@@ -116,8 +141,16 @@ public class LearningSceneController implements Initializable {
         Stage stage = (Stage)((MenuItem) btn_nav_test).getParentPopup().getOwnerWindow();
         stage.getScene().setRoot(backLoader);
     }
+    
+    /**
+     * This method allows to go to the learning mode. Seems useless.
+     * @param actionEvent when there is an event called goLearn threw by the fxml file.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    
     @FXML
-    public void goLearn(ActionEvent actionEvent)  throws IOException{
+    public void goLearn(ActionEvent actionEvent)  throws IOException, InterruptedException{
         capture1.setCameraActive(false);
         // stop the timer
         capture1.stopAcquisition();
@@ -125,13 +158,28 @@ public class LearningSceneController implements Initializable {
 		Stage stage = (Stage)((MenuItem) btn_nav_learn).getParentPopup().getOwnerWindow();
         stage.getScene().setRoot(backLoader);
     }
+    
+    /**
+     * This method allows to go to the learning base when we are in learning mode, clicking on the option Base.
+     * @param actionEvent when there is an event called goLearnBase threw by the fxml file.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    
     @FXML
-    public void goLearnBase(ActionEvent actionEvent) throws IOException{
+    public void goLearnBase(ActionEvent actionEvent) throws IOException, InterruptedException{
         capture1.stopAcquisition();
         Parent backLoader = FXMLLoader.load(getClass().getResource("view/LearningBase.fxml"));
         Stage stage = (Stage)((MenuItem) btn_learningbase).getParentPopup().getOwnerWindow();
         stage.getScene().setRoot(backLoader);
     }
+    
+    /**
+     * This method allows to import a database of photos when we are in learning mode, clicking on option Import database in Import.
+     * It opens a file chooser and allows to select a folder, which is the one you want to learn the images in.
+     * The descriptors of all the images are then calculated and saved in the CSV file
+     * @param actionEvent when there is an event called importdatabase threw by the FXML file.
+     */
     
     public void importdatabase(ActionEvent actionEvent){
         try {
@@ -154,6 +202,13 @@ public class LearningSceneController implements Initializable {
         }
     }
 
+    /**
+     * This method allows to import a picture when we are in learning mode, clicking on option Import picture in Import.
+     * It opens a file chooser and allows to select a file, which is the one you want to learn the image of.
+     * The descriptors of the image are then calculated and saved in the CSV file
+     * @param actionEvent when there is an event called importpicture threw by the FXML file.
+     */
+    
     public void importpicture(ActionEvent actionEvent){
         try {
 
@@ -176,6 +231,12 @@ public class LearningSceneController implements Initializable {
             MsgUtil.DisplayMsg("Import failed !");
         }
     }
+    
+    /**
+     * This method allows to display the informations when we are in learning mode, clicking on option About in help.
+     * It opens a window which contains useful informations to use and understand the learning mode.
+     * @param actionEvent when there is an event called about threw by the FXML file.
+     */
     
     public void about(ActionEvent actionEvent) {       
     	Stage stage = new Stage();
@@ -235,24 +296,18 @@ public class LearningSceneController implements Initializable {
         root.getChildren().add(grabText);
         root.getChildren().add(title3);
         root.getChildren().add(importText);
-        //Creating a scene object
-        Scene scene = new Scene(root, 600, 400);  
-        
-        //Setting title to the Stage 
-        stage.setTitle("About Learning Mode"); 
-           
-        //Adding scene to the stage 
+
+        Scene scene = new Scene(root, 600, 400);   
+        stage.setTitle("About Learning Mode");  
         stage.setScene(scene); 
-           
-        //Displaying the contents of the stage 
         stage.show(); 
      }
 
-
-    /*Fonction servant à l'actualisation de l'affichage de l'image enregistrée précédente
-     * ainsi que l'affichage de la liste de la base d'apprentissage
-     *
+    /**
+     * This method allows to update the display of the previous picture saved.
+     * It also updates the display of the list of the learning base.
      */
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -260,12 +315,9 @@ public class LearningSceneController implements Initializable {
             start_btn.setOnMouseClicked(new EventHandler() {
                 @Override
                 public void handle(Event event) {
-                    // affiche carte enregistrée précédente
                     String card_name= capture1.getCard().getName();
                     name_saved_card.setText(card_name);
-                    //System.out.println("Nom de la carte enregistrée: " + card_name);
                     String path = System.getProperty("user.dir")+ "/apprentissage/"+ card_name + ".png";
-                    //System.out.println("chemin : " + path);
                     base.displayImage(path, img_saved);
                 }
             });
