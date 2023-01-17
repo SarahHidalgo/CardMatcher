@@ -26,10 +26,10 @@ import tse.fise2.image3.cardmatcher.util.FileUtil;
 public class Base {
 
 	private String path;
+	private String card_name;
 	public boolean correspondance=false;
 	
-	private Camera capture1 = new CameraTest();
-	
+
 	public boolean isCorrespondance() {
 		return correspondance;
 	}
@@ -140,37 +140,31 @@ public class Base {
                 path = System.getProperty("user.dir")+ "/"+baseName+"/"+ mylistview.getSelectionModel().getSelectedItem();
                 correspondance=false;
                 displayImage(path, image_base);
-                label_current_card.setText(mylistview.getSelectionModel().getSelectedItem());
+                //label_current_card.setText(mylistview.getSelectionModel().getSelectedItem());
 				if (label_title!=null) {
 					label_title.setText("Carte Selectionnée");
-					displayCorres(label_title,label_small_card,label_current_card,image_base,small_img_card);			
+					displayCorres(label_title,label_small_card,label_current_card,image_base,small_img_card,mylistview);			
 					}
 				}            
         });
     };
     
-    /**
-     * Displays the recognized image and updates the labels.
-     * If the correspondence attribute is true, the corresponding image is displayed.
-     * Else the small image card is set to null and the title is set to "Carte Sélectionnée"
-     * @param label_title The label where the title of the selected image is displayed
-     * @param label_small_card The label where the name of the corresponding image is displayed
-     * @param label_current_card The label where the name of the selected image is displayed
-     * @param image_base The ImageView where the selected image is displayed
-     * @param small_img_card The ImageView where the corresponding image is displayed
-     */
-    
-	public void displayCorres(Label label_title, Label label_small_card,Label label_current_card, ImageView image_base, ImageView small_img_card) {
+	public void displayCorres(Label label_title, Label label_small_card,Label label_current_card, ImageView image_base, ImageView small_img_card, ListView<String> mylistview) {
     	if (correspondance) {
         	displayImage(getPath(),small_img_card);
-        	label_title.setText("Carte Correspondante");
+        	label_small_card.setText("carte selectionnée");       	
+        	label_title.setText("Carte Correspondante"); 
         	
-        	// ici faut display image qui correspond le mieux 
-        	label_current_card.setText("nom carte correspondante");
+        	// Display best correspondance
+        	String corres_card_name = mylistview.getSelectionModel().getSelectedItem().substring(0, mylistview.getSelectionModel().getSelectedItem().length()-9);
+        	String path_corres_card = System.getProperty("user.dir")+ "/apprentissage/"+ corres_card_name + ".png";
+        	this.displayImage(path_corres_card, image_base);
+        	label_current_card.setText(corres_card_name);
     	}
     	else {
     		small_img_card.setImage(null);
-    		label_title.setText("Carte Sélectionnée");
+    		label_title.setText("Carte Selectionnée");
+    		label_small_card.setText(null); 
     	}
 	}
 	
@@ -186,6 +180,7 @@ public class Base {
 	
 	public void displayPtsInteretsCard(Label label_current_card, Label label_small_card, ImageView small_img_card, ImageView image_base) {
 		if (this.isCorrespondance()) {
+			label_small_card.setText(null); 
 			// Xavier // mettre image avec les deux cartes comparées et leurs pts d'inétrets jsp quoi
 			small_img_card.setImage(null);
 			displayImage("C:/Users/sarah/git/projet_informatique/apprentissage/3coeur.png",image_base);
