@@ -238,7 +238,7 @@ public class TestSceneController implements Initializable {
 
     }
 	public void displayPtsInterets(ActionEvent actionEvent) {
-		base.displayPtsInteretsCard(label_base_test, label_small_card, small_img_card, image_base);
+		base.displayPtsInteretsCard(label_base_test, label_small_card, small_img_card, image_base,mylistview);
 	}
     
 

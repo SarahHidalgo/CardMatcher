@@ -4,7 +4,24 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import org.controlsfx.tools.Utils;
+import org.opencv.core.Core;
+import org.opencv.core.DMatch;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.core.MatOfDMatch;
+import org.opencv.core.MatOfKeyPoint;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Point;
+import org.opencv.features2d.BFMatcher;
+import org.opencv.features2d.Features2d;
+import org.opencv.features2d.SIFT;
+import org.opencv.imgcodecs.Imgcodecs;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -15,6 +32,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import tse.fise2.image3.cardmatcher.util.FileUtil;
 
 /**
@@ -26,7 +44,6 @@ import tse.fise2.image3.cardmatcher.util.FileUtil;
 public class Base {
 
 	private String path;
-	private String card_name;
 	public boolean correspondance=false;
 	
 
@@ -166,6 +183,8 @@ public class Base {
     		label_title.setText("Carte Selectionnée");
     		label_small_card.setText(null); 
     	}
+    	
+
 	}
 	
 	/**
@@ -178,21 +197,59 @@ public class Base {
 	 * @param small_img_card The ImageView where the corresponding image is displayed
 	 */
 	
-	public void displayPtsInteretsCard(Label label_current_card, Label label_small_card, ImageView small_img_card, ImageView image_base) {
-		if (this.isCorrespondance()) {
-			label_small_card.setText(null); 
-			// Xavier // mettre image avec les deux cartes comparées et leurs pts d'inétrets jsp quoi
-			small_img_card.setImage(null);
-			displayImage("C:/Users/sarah/git/projet_informatique/apprentissage/3coeur.png",image_base);
-		}
-		else {
-	    	// Idisplay juste pts intérets carte selectionnée
-	    	displayImage("C:/Users/sarah/git/projet_informatique/apprentissage/1.jpg", image_base);
-	    	label_current_card.setText("carte avec pts interets");
-		}
+	public void displayPtsInteretsCard(Label label_current_card, Label label_small_card, ImageView small_img_card, ImageView image_base ,ListView<String> mylistview) {
+	    if (this.isCorrespondance()) {
+	    	
+	    	
+	    	String corres_card_name = mylistview.getSelectionModel().getSelectedItem().substring(0, mylistview.getSelectionModel().getSelectedItem().length()-9);
+        	String path_corres_card = System.getProperty("user.dir")+ "/apprentissage/"+ corres_card_name + ".png";
+        	String imgPath = Paths.get(System.getProperty("user.home"), "image2.png").toString();
+        	compareImages(this.getPath(), path_corres_card,imgPath);
+        	this.displayImage(imgPath, image_base);
+	    	
+    		
+    		label_current_card.setText("Carte Selectionnée");
+    		
+	    	
+
+
+	    } else {
+	    	String imgPath = Paths.get(System.getProperty("user.home"), "image1.png").toString();
+	        displaySIFTKeypoints(this.getPath(),imgPath);
+
+	        displayImage(imgPath,image_base);
+
+	        label_current_card.setText("carte avec pts interets test");
+	        label_small_card.setText("Carte capturée");
+ 
+	    }
+       
+	    
 	}
+
+
     
     
+	public static void displaySIFTKeypoints(String imgPath, String savePath) {
+		// Read the image file
+		Mat img = Imgcodecs.imread(imgPath);
+		// Initialize SIFT feature detector
+		SIFT detector = SIFT.create();
+
+		// Find keypoints and descriptors for the image
+		MatOfKeyPoint keypoints = new MatOfKeyPoint();
+		Mat descriptors = new Mat();
+		detector.detectAndCompute(img, new Mat(), keypoints, descriptors);
+
+		// Draw keypoints on the image
+		Mat output = new Mat();
+		Features2d.drawKeypoints(img, keypoints, output);
+
+		// Save the image in png format
+		Imgcodecs.imwrite(savePath, output);
+	}
+
+
 	/**
 	 * Displays the points of interest of the selected image and the comparison 
 	 * of the selected image with the corresponding image
@@ -212,6 +269,55 @@ public class Base {
             }
         });
     }
+    
+    
+    
+    static {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    }
+
+    public static void compareImages(String img1Path, String img2Path, String savePath) {
+    	Mat img1 = Imgcodecs.imread(img1Path);
+    	Mat img2 = Imgcodecs.imread(img2Path);
+        // Initialize SIFT feature detector
+        SIFT detector = SIFT.create();
+
+        // Find keypoints and descriptors for both images
+        MatOfKeyPoint keypoints1 = new MatOfKeyPoint();
+        Mat descriptors1 = new Mat();
+        detector.detectAndCompute(img1, new Mat(), keypoints1, descriptors1);
+
+        MatOfKeyPoint keypoints2 = new MatOfKeyPoint();
+        Mat descriptors2 = new Mat();
+        detector.detectAndCompute(img2, new Mat(), keypoints2, descriptors2);
+
+        // Match the descriptors
+        BFMatcher matcher = BFMatcher.create();
+        MatOfDMatch matches = new MatOfDMatch();
+        matcher.match(descriptors1, descriptors2, matches);
+
+        // Get the coordinates of the matched keypoints
+        List<Point> matchedPoints1 = new ArrayList<>();
+        List<Point> matchedPoints2 = new ArrayList<>();
+        DMatch[] matchArray = matches.toArray();
+        for (DMatch match : matchArray) {
+            matchedPoints1.add(keypoints1.toList().get(match.queryIdx).pt);
+            matchedPoints2.add(keypoints2.toList().get(match.trainIdx).pt);
+        }
+
+        // Draw lines between matched points on output image
+        Mat output = new Mat();
+        MatOfPoint2f points1 = new MatOfPoint2f();
+        points1.fromList(matchedPoints1);
+        MatOfPoint2f points2 = new MatOfPoint2f();
+        points2.fromList(matchedPoints2);
+        Features2d.drawMatches(img1, keypoints1, img2, keypoints2, matches, output);
+
+        // Save the output image in png format
+        Imgcodecs.imwrite(savePath, output);
+    }
+ 
+
 
 
 }
