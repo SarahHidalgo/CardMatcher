@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -12,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import java.net.URL?>
 <VBox alignment="BASELINE_CENTER" prefHeight="600.0" prefWidth="1136.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.LearningSceneController">
     <children>
 
@@ -105,5 +107,14 @@
             </ImageView>
          </children>
       </HBox>
+      <MenuButton id="listContainer" mnemonicParsing="false" styleClass="custom-menu-button">
+        <items>
+          <MenuItem mnemonicParsing="false"  onAction="#importdatabase" text="Import database" />
+          <MenuItem mnemonicParsing="false" onAction="#importpicture" text="Import picture" />
+        </items>
+      </MenuButton>
     </children>
+    <stylesheets>
+        <URL value="@../../css/styles.css" />
+    </stylesheets>
 </VBox>
