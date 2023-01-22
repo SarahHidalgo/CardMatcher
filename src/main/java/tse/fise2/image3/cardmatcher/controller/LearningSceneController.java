@@ -270,7 +270,7 @@ public class LearningSceneController implements Initializable {
         title2.setX(50); 
         title2.setY(160);
         
-        grabText.setText("When you are ready to grab your card, just click on the red button to make your webcam start. Then, just place your card in the red rectangle, and click again on the red button. All that was inside the red rectangle is saved as a picture in your computer. Then a small window appears, to rename your .jpg file writing a new name for it.");
+        grabText.setText("When you are ready to grab your card, just click on the Start camera button to make your webcam start. Then, just place your card in the red rectangle, and click on the Capture button. All that was inside the red rectangle is saved as a picture in your computer. Then a small window appears, to rename your .jpg file writing a new name for it.");
         grabText.setWrappingWidth(500);
         grabText.setTextAlignment(TextAlignment.JUSTIFY);
         
@@ -303,6 +303,38 @@ public class LearningSceneController implements Initializable {
         stage.show(); 
      }
 
+    public void aboutLearningBase(ActionEvent actionEvent) {       
+    	Stage stage = new Stage();
+    	
+    	//Creating a Text object 
+    	Text title = new Text(); 
+    	Text presentationText = new Text();
+    	Group root = new Group();
+        
+        //Setting the text to be added. 
+        title.setText("About learning base"); 
+        title.setFont(Font.font("arial", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
+        //setting the position of the text 
+        title.setX(50); 
+        title.setY(50);
+        
+        presentationText.setText("The CardMatcher learning base is a mode where you can see the images of all the cards you have already learnt."
+        		+ "You can browse your database either with your mouse or up and down keys.");
+        presentationText.setWrappingWidth(500);
+        presentationText.setTextAlignment(TextAlignment.JUSTIFY);
+        
+        presentationText.setX(50); 
+        presentationText.setY(90);
+        
+        root.getChildren().add(title);
+        root.getChildren().add(presentationText);
+
+        Scene scene = new Scene(root, 600, 150);   
+        stage.setTitle("About Learning Mode");  
+        stage.setScene(scene); 
+        stage.show(); 
+     }
+    
     /**
      * This method allows to update the display of the previous picture saved.
      * It also updates the display of the list of the learning base.
@@ -316,9 +348,18 @@ public class LearningSceneController implements Initializable {
                 @Override
                 public void handle(Event event) {
                     String card_name= capture1.getCard().getName();
-                    name_saved_card.setText(card_name);
-                    String path = System.getProperty("user.dir")+ "/apprentissage/"+ card_name + ".png";
-                    base.displayImage(path, img_saved);
+                    String path1 = System.getProperty("user.dir")+ "/apprentissage/";
+                    File dir  = new File(path1);
+                    File[] liste = dir.listFiles();
+                    if (liste.length==0){
+                        String path = System.getProperty("user.dir")+ "/src/main/resources/tse/fise2/image3/cardmatcher/images/fond_carte.jpg";
+                        base.displayImage(path, img_saved);
+                    }
+                    else {
+                    	String path = System.getProperty("user.dir")+ "/apprentissage/"+ card_name + ".png";
+                    	base.displayImage(path, img_saved);
+                    	name_saved_card.setText(card_name);
+                    }
                 }
             });
         }

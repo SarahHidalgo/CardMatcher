@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox alignment="BASELINE_CENTER" prefHeight="600.0" prefWidth="1136.0" stylesheets="@../../css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tse.fise2.image3.cardmatcher.controller.LearningSceneController">
     <children>
@@ -28,10 +29,10 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <Menu mnemonicParsing="false" text="import">
+                        <Menu mnemonicParsing="false" text="Import">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#importpicture" text="import picture" />
-                                <MenuItem mnemonicParsing="false" onAction="#importdatabase" text="import database" />
+                                <MenuItem mnemonicParsing="false" onAction="#importpicture" text="Import picture" />
+                                <MenuItem mnemonicParsing="false" onAction="#importdatabase" text="Import database" />
                             </items>
                         </Menu>
 
@@ -39,7 +40,7 @@
                 </Menu>
             <Menu mnemonicParsing="false" text="Base">
               <items>
-                  <MenuItem fx:id="btn_learningbase" mnemonicParsing="false" onAction="#goLearnBase" text="Base d'Apprentissage" />
+                  <MenuItem fx:id="btn_learningbase" mnemonicParsing="false" onAction="#goLearnBase" text="Learning base" />
               </items>
             </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -50,7 +51,16 @@
             </menus>
 
         </MenuBar>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="1154.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="69.0" prefWidth="1154.0" text="Learning Mode" textFill="#8d9eff" underline="true">
+               <font>
+                  <Font name="Verdana Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="488.0" prefWidth="1154.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="learningFrame" fitHeight="462.0" fitWidth="693.0" pickOnBounds="true" preserveRatio="true">
@@ -63,12 +73,24 @@
             </ImageView>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="195.0" text="Dernière image enregistrée">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="187.0" text="~ Last saved picture ~ " textAlignment="CENTER" textFill="#8d9eff">
                      <VBox.margin>
                         <Insets bottom="15.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="Source Serif Pro Black" size="12.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </Label>
-                  <ImageView fx:id="img_saved" fitHeight="260.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="img_saved" fitHeight="260.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <DropShadow height="9.32" radius="3.1875" width="5.43" />
+                     </effect>
+                     <image>
+                        <Image url="@../../images/fond_carte.jpg" />
+                     </image></ImageView>
                   <Label fx:id="name_saved_card" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="168.0">
                      <VBox.margin>
                         <Insets top="15.0" />

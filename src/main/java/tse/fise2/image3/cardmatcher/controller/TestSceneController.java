@@ -191,7 +191,7 @@ public class TestSceneController implements Initializable {
         title2.setX(50); 
         title2.setY(160);
         
-        grabText.setText("When you are ready to grab your card, just click on the red button to make your webcam start. Then, just place your card in the green rectangle, and click again on the red button. All that was inside the green rectangle is saved as a picture in your computer, and then matched with the pictures lying in your learning database.");
+        grabText.setText("When you are ready to grab your card, just click on the Start camera button to make your webcam start. Then, just place your card in the green rectangle, and click again on the Capture button. All that was inside the green rectangle is saved as a picture in your computer, and then matched with the pictures lying in your learning database.");
         grabText.setWrappingWidth(500);
         grabText.setTextAlignment(TextAlignment.JUSTIFY);
         
@@ -210,6 +210,72 @@ public class TestSceneController implements Initializable {
         
         matchText.setX(50); 
         matchText.setY(300);
+        
+        root.getChildren().add(title);
+        root.getChildren().add(presentationText);
+        root.getChildren().add(title2);
+        root.getChildren().add(grabText);
+        root.getChildren().add(title3);
+        root.getChildren().add(matchText);
+
+        Scene scene = new Scene(root, 600, 420);  
+        stage.setTitle("About Learning Mode"); 
+        stage.setScene(scene);
+        stage.show(); 
+     }
+    
+    public void aboutTestBase(ActionEvent actionEvent) {       
+    	Stage stage = new Stage();
+    	
+    	//Creating a Text object 
+    	Text title = new Text(); 
+    	Text title2 = new Text();
+    	Text title3 = new Text();
+    	Text presentationText = new Text();
+    	Text grabText = new Text();
+    	Text matchText = new Text();
+    	Group root = new Group();
+        
+        //Setting the text to be added. 
+        title.setText("About test base"); 
+        title.setFont(Font.font("arial", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
+        //setting the position of the text 
+        title.setX(50); 
+        title.setY(50);
+        
+        presentationText.setText("The CardMatcher test base is a mode where you can select a card between the one you have already tested. Then, you can either print its keypoints or try to match it with the cards you learnt.\r\n");
+        presentationText.setWrappingWidth(500);
+        presentationText.setTextAlignment(TextAlignment.JUSTIFY);
+        
+        presentationText.setX(50); 
+        presentationText.setY(90);
+        
+        title2.setText("Keypoints"); 
+        title2.setFont(Font.font("arial", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
+        //setting the position of the text 
+        title2.setX(50); 
+        title2.setY(160);
+        
+        grabText.setText("You can print the main keypoints of the selected card, computed by the SIFT algorithm. These keypoints represent the image main features but not all of them are printed for aesthetic reasons."
+        		+ "Each keypoint is a special structure which has many attributes like its (x,y) coordinates, size of the meaningful neighbourhood, angle which specifies its orientation, response that specifies strength of keypoints etc.");
+        grabText.setWrappingWidth(500);
+        grabText.setTextAlignment(TextAlignment.JUSTIFY);
+        
+        grabText.setX(50); 
+        grabText.setY(190);
+        
+        title3.setText("Match"); 
+        title3.setFont(Font.font("arial", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
+        //setting the position of the text 
+        title3.setX(50); 
+        title3.setY(300);
+        
+        matchText.setText("This button allows to compare the picture you are grabbing with the pictures contained in your learning database. In output, the app will display the card in your learning database with the highest proximity score, and it will draw the lines of the recognized keypoints.");
+        matchText.setWrappingWidth(500);
+        matchText.setTextAlignment(TextAlignment.JUSTIFY);
+        
+        matchText.setX(50); 
+        matchText.setY(330);
         
         root.getChildren().add(title);
         root.getChildren().add(presentationText);

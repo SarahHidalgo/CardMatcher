@@ -42,7 +42,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="About" onAction="#aboutLearningBase"/>
                </items>
             </Menu>
          </menus>
@@ -82,10 +82,13 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="454.0" prefWidth="216.0">
                <children>
-                  <Label text="Carte Sélectionnée">
+                  <Label text="~ Card selected ~" textFill="#8d9eff">
                      <VBox.margin>
                         <Insets bottom="30.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
                   </Label>
                   <ImageView fx:id="image_base" fitHeight="259.0" fitWidth="197.0" pickOnBounds="true" preserveRatio="true">
                      <effect>

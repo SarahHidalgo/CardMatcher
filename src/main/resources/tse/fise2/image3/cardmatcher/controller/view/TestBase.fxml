@@ -33,7 +33,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="About" onAction="#aboutTestBase"/>
                </items>
             </Menu>
          </menus>
@@ -76,12 +76,12 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="570.0" prefWidth="456.0">
                <children>
-                  <Label fx:id="label_carte" text="Carte Sélectionnée">
+                  <Label fx:id="label_carte" text="~ Selected card ~" textFill="#8d9eff" underline="true">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
                      <font>
-                        <Font name="Yu Gothic Medium" size="14.0" />
+                        <Font name="Verdana Bold" size="16.0" />
                      </font>
                   </Label>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -112,12 +112,12 @@
                         <Insets bottom="15.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Button fx:id="btn_interets" mnemonicParsing="false" onAction="#displayPtsInterets" text="Pts intérêts">
+                  <Button fx:id="btn_interets" mnemonicParsing="false" onAction="#displayPtsInterets" text="Keypoints">
                      <VBox.margin>
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btn_correspondance" mnemonicParsing="false" onAction="#displayCorrespondance" text="Carte correspondante" />
+                  <Button fx:id="btn_correspondance" mnemonicParsing="false" onAction="#displayCorrespondance" text="Match" />
                </children>
                <HBox.margin>
                   <Insets left="20.0" right="20.0" />
