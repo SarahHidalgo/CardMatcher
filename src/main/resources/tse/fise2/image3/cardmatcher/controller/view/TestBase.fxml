@@ -33,7 +33,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" onAction="#aboutTestBase"/>
+                  <MenuItem mnemonicParsing="false" onAction="#aboutTestBase" text="About" />
                </items>
             </Menu>
          </menus>
@@ -99,6 +99,9 @@
                            <effect>
                               <Glow />
                            </effect>
+                           <image>
+                              <Image url="@../../images/fond_carte.jpg" />
+                           </image>
                         </ImageView>
                         <ImageView fitHeight="146.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>

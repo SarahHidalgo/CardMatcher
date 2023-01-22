@@ -26,14 +26,14 @@
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="File">
-              <items>
+               <items>
                   <Menu mnemonicParsing="false" text="import">
                      <items>
                         <MenuItem mnemonicParsing="false" text="import picture" />
                         <MenuItem mnemonicParsing="false" onAction="#importdatabase" text="import database" />
                      </items>
                   </Menu>
-              </items>
+               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Base">
                <items>
@@ -42,7 +42,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" onAction="#aboutLearningBase"/>
+                  <MenuItem mnemonicParsing="false" onAction="#aboutLearningBase" text="About" />
                </items>
             </Menu>
          </menus>
@@ -94,6 +94,9 @@
                      <effect>
                         <Glow />
                      </effect>
+                     <image>
+                        <Image url="@../../images/fond_carte.jpg" />
+                     </image>
                   </ImageView>
                   <Label fx:id="label_base_learning" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="126.0">
                      <VBox.margin>
