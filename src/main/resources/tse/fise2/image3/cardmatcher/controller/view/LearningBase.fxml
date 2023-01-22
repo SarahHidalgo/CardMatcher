@@ -37,12 +37,12 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Base">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Base d'Apprentissage" />
+                  <MenuItem disable="true" mnemonicParsing="false" text="Learning Base" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" onAction="#aboutLearningBase"/>
+                  <MenuItem mnemonicParsing="false" onAction="#aboutLearningBase" text="About" />
                </items>
             </Menu>
          </menus>

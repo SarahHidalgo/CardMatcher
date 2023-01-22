@@ -208,8 +208,9 @@ public class Base {
         	this.displayImage(imgPath, image_base);
 	    	
     		
-    		label_current_card.setText("Selected card");
-    		
+    		label_current_card.setText(null);
+    		label_small_card.setText(null);
+    		small_img_card.setImage(null);
 	    	
 
 
@@ -220,7 +221,7 @@ public class Base {
 	        displayImage(imgPath,image_base);
 
 	        label_current_card.setText("Card with keypoints");
-	        label_small_card.setText("Grabbed card");
+	        //label_small_card.setText("Grabbed card");
  
 	    }
        

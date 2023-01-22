@@ -28,12 +28,12 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Base">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Base test" />
+                  <MenuItem disable="true" mnemonicParsing="false" text="Base test" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About" onAction="#aboutTestBase"/>
+                  <MenuItem mnemonicParsing="false" onAction="#aboutTestBase" text="About" />
                </items>
             </Menu>
          </menus>
@@ -74,7 +74,7 @@
                   <Insets left="20.0" right="20.0" />
                </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="570.0" prefWidth="456.0">
+            <VBox alignment="CENTER" prefHeight="570.0" prefWidth="577.0">
                <children>
                   <Label fx:id="label_carte" text="~ Selected card ~" textFill="#8d9eff" underline="true">
                      <VBox.margin>
@@ -84,7 +84,7 @@
                         <Font name="Verdana Bold" size="16.0" />
                      </font>
                   </Label>
-                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="277.0" prefWidth="508.0">
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -95,7 +95,7 @@
                               <Insets right="15.0" />
                            </HBox.margin>
                         </VBox>
-                        <ImageView fx:id="image_base" fitHeight="277.0" fitWidth="216.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                        <ImageView fx:id="image_base" fitHeight="277.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                            <effect>
                               <Glow />
                            </effect>

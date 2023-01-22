@@ -56,8 +56,7 @@ public abstract class Camera{
 	private boolean testingmode;
 	private Boolean auto;
 
-	private Card card= new Card("2coeur");
-	private Descriptor descCard;
+	private Card card= new Card();
 	public Image best_image;
 
 	//
@@ -391,7 +390,6 @@ public abstract class Camera{
 	 */
 
 	public void setDescCard(Descriptor descCard) {
-		this.descCard = descCard;
 	}
 
 	/**
