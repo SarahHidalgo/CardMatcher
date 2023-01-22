@@ -169,8 +169,8 @@ public class Base {
 	public void displayCorres(Label label_title, Label label_small_card,Label label_current_card, ImageView image_base, ImageView small_img_card, ListView<String> mylistview) {
     	if (correspondance) {
         	displayImage(getPath(),small_img_card);
-        	label_small_card.setText("carte selectionnée");       	
-        	label_title.setText("Carte Correspondante"); 
+        	label_small_card.setText("Selected Card");       	
+        	label_title.setText("Matched Card"); 
         	
         	// Display best correspondance
         	String corres_card_name = mylistview.getSelectionModel().getSelectedItem().substring(0, mylistview.getSelectionModel().getSelectedItem().length()-9);
@@ -180,7 +180,7 @@ public class Base {
     	}
     	else {
     		small_img_card.setImage(null);
-    		label_title.setText("Carte Selectionnée");
+    		label_title.setText("Selected card");
     		label_small_card.setText(null); 
     	}
     	
@@ -208,7 +208,7 @@ public class Base {
         	this.displayImage(imgPath, image_base);
 	    	
     		
-    		label_current_card.setText("Carte Selectionnée");
+    		label_current_card.setText("Selected card");
     		
 	    	
 
@@ -219,8 +219,8 @@ public class Base {
 
 	        displayImage(imgPath,image_base);
 
-	        label_current_card.setText("carte avec pts interets test");
-	        label_small_card.setText("Carte capturée");
+	        label_current_card.setText("Card with keypoints");
+	        label_small_card.setText("Grabbed card");
  
 	    }
        
