@@ -37,3 +37,15 @@
 #detect_frame3{
     -fx-opacity: 0.4;
 }
+
+.custom-menu-button {
+
+    -fx-background-image: url("../icons/import-icon.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-size: 2.5em;
+}
+
+
