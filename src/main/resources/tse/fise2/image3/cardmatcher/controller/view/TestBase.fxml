@@ -88,7 +88,10 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView fx:id="small_img_card" fitHeight="146.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="small_img_card" fitHeight="146.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/fond_carte.jpg" />
+                                 </image></ImageView>
                               <Label fx:id="label_small_card" />
                            </children>
                            <HBox.margin>
@@ -99,6 +102,9 @@
                            <effect>
                               <Glow />
                            </effect>
+                           <image>
+                              <Image url="@../../images/fond_carte.jpg" />
+                           </image>
                         </ImageView>
                         <ImageView fitHeight="146.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>

@@ -110,7 +110,10 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                          <ImageView fx:id="detect_frame" fitHeight="157.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
+                          <ImageView fx:id="detect_frame" fitHeight="157.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/fond_carte.jpg" />
+                           </image></ImageView>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="237.0">
@@ -119,11 +122,17 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
+                           <image>
+                              <Image url="@../../images/fond_carte.jpg" />
+                           </image>
                         </ImageView>
                         <ImageView fx:id="detect_frame3" fitHeight="157.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>
+                           <image>
+                              <Image url="@../../images/fond_carte.jpg" />
+                           </image>
                         </ImageView>
                      </children>
                      <VBox.margin>

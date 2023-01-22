@@ -94,6 +94,9 @@
                      <effect>
                         <Glow />
                      </effect>
+                     <image>
+                        <Image url="@../../images/fond_carte.jpg" />
+                     </image>
                   </ImageView>
                   <Label fx:id="label_base_learning" alignment="CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="126.0">
                      <VBox.margin>
