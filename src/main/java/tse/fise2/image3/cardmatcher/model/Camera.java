@@ -27,8 +27,6 @@ import javafx.stage.WindowEvent;
 import tse.fise2.image3.cardmatcher.sift.Descriptor;
 import tse.fise2.image3.cardmatcher.sift.Sift;
 import tse.fise2.image3.cardmatcher.util.Audio;
-import tse.fise2.image3.cardmatcher.util.ImageUtil;
-import tse.fise2.image3.cardmatcher.util.MsgUtil;
 
 
 /**
@@ -89,11 +87,11 @@ public abstract class Camera{
 						Scalar scalar = new Scalar(182, 74, 108);
 						if (learningmode) {
 							// Definition of a red rectangle for learning mode
-							scalar= new Scalar(0, 0, 255);
+							scalar= new Scalar(225, 114, 141);
 						}
 						else{
 							// Definition of a green rectangle for learning mode
-							scalar= new Scalar(0, 255, 0);
+							scalar= new Scalar(255, 224, 185);
 						}
 						String SE = System.getProperty("os.name").toLowerCase();
 						// Change size of the rectangle according to OS.
@@ -264,7 +262,7 @@ public abstract class Camera{
 			card.setName(l_scoreImage.get(0).getImageName());
 
 
-			MsgUtil.DisplayMsg("this card belongs to class "+card.getName()+" with the proximity score  "+l_scoreImage.get(0).getScore() );
+			//MsgUtil.DisplayMsg("this card belongs to class "+card.getName()+" with the proximity score  "+l_scoreImage.get(0).getScore() );
 			this.saveImage();
 
 			InputStream stream = null;

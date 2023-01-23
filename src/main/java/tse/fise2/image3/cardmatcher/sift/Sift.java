@@ -3,7 +3,6 @@ import org.opencv.core.*;
 
 import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.SIFT;
-import org.opencv.imgcodecs.Imgcodecs;
 import tse.fise2.image3.cardmatcher.model.ScoreImage;
 import tse.fise2.image3.cardmatcher.util.FileUtil;
 
@@ -11,7 +10,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * This class implements the four main steps involved in SIFT algorithm to make descriptors and recognition

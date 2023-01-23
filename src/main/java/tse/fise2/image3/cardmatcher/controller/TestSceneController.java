@@ -1,4 +1,5 @@
 package tse.fise2.image3.cardmatcher.controller;
+
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -22,7 +23,6 @@ import tse.fise2.image3.cardmatcher.model.Camera;
 
 import tse.fise2.image3.cardmatcher.model.CameraTest;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -219,7 +219,7 @@ public class TestSceneController implements Initializable {
         root.getChildren().add(matchText);
 
         Scene scene = new Scene(root, 600, 420);  
-        stage.setTitle("About Learning Mode"); 
+        stage.setTitle("About Test Mode"); 
         stage.setScene(scene);
         stage.show(); 
      }
@@ -285,7 +285,7 @@ public class TestSceneController implements Initializable {
         root.getChildren().add(matchText);
 
         Scene scene = new Scene(root, 600, 420);  
-        stage.setTitle("About Learning Mode"); 
+        stage.setTitle("About Test Mode"); 
         stage.setScene(scene);
         stage.show(); 
      }

@@ -1,7 +1,5 @@
 package tse.fise2.image3.cardmatcher.model;
 
-import tse.fise2.image3.cardmatcher.sift.Descriptor;
-
 /**
 * The Card class represents a card with a name.
 */

@@ -1,8 +1,5 @@
 package tse.fise2.image3.cardmatcher.controller;
 
-
-
-
 import java.awt.Label;
 
 import java.io.File;
@@ -31,14 +28,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextBoundsType;
-import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;

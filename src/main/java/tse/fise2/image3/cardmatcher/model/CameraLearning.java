@@ -4,8 +4,6 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
-import tse.fise2.image3.cardmatcher.model.Camera;
 import tse.fise2.image3.cardmatcher.sift.Descriptor;
 import tse.fise2.image3.cardmatcher.sift.Sift;
 import tse.fise2.image3.cardmatcher.util.FileUtil;
